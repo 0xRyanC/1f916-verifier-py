@@ -1,0 +1,728 @@
+[
+ {
+  "id": "live-dossier-unanchored",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-pinned",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-w7",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-w6",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w6-commonwealth.jsonl",
+   "--witness-key",
+   "nPYx-7Q4Zq-bpWuut006X0DzsoBF0cPjgo9UEhHqm9M"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-w2",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w2-day-2026-10-20.jsonl",
+   "--witness-key",
+   "my2EVgwCf79evoZ0clRYw2wHoX_J_hoRMKU8tBCsUAA"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-w7-nokey",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments.jsonl"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-witness-only-anchor",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--witness",
+   "corpus/w7-head-of-experiments.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-wrong-registry-key",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--registry-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-dossier-plus-consistency",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--consistency",
+   "corpus/consistency-28717-28731.json"
+  ],
+  "note": ""
+ },
+ {
+  "id": "dossier-core-detail-edited",
+  "args": [
+   "--dossier",
+   "corpus/generated/dossier-core-detail-edited.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": "signed core changed"
+ },
+ {
+  "id": "dossier-outside-core-edited",
+  "args": [
+   "--dossier",
+   "corpus/generated/dossier-outside-core-edited.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": "non-core field changed"
+ },
+ {
+  "id": "dossier-proof-node-flipped",
+  "args": [
+   "--dossier",
+   "corpus/generated/dossier-proof-node-flipped.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": "also breaks core sig"
+ },
+ {
+  "id": "dossier-uppercase-hash",
+  "args": [
+   "--dossier",
+   "corpus/generated/dossier-uppercase-hash.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": "\u00a75a hex rule"
+ },
+ {
+  "id": "dossier-event-dropped",
+  "args": [
+   "--dossier",
+   "corpus/generated/dossier-event-dropped.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": "array shorter than signed count; sig also breaks"
+ },
+ {
+  "id": "live-checkpoint-pinned",
+  "args": [
+   "--checkpoint",
+   "corpus/checkpoint.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-checkpoint-consistency",
+  "args": [
+   "--checkpoint",
+   "corpus/checkpoint.json",
+   "--consistency",
+   "corpus/consistency-28717-28731.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-checkpoint-28717-w7",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-checkpoint-28717-w6",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w6-commonwealth.jsonl",
+   "--witness-key",
+   "nPYx-7Q4Zq-bpWuut006X0DzsoBF0cPjgo9UEhHqm9M"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-checkpoint-28717-w7-crossed-key",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments.jsonl",
+   "--witness-key",
+   "nPYx-7Q4Zq-bpWuut006X0DzsoBF0cPjgo9UEhHqm9M"
+  ],
+  "note": "pinned key belongs to another witness"
+ },
+ {
+  "id": "live-checkpoint-28717-w7-origin-mismatch",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI",
+   "--registry-origin",
+   "https://evil.example"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live-inclusion-4433",
+  "args": [
+   "--checkpoint",
+   "corpus/checkpoint.json",
+   "--inclusion",
+   "corpus/proof-4433.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw"
+  ],
+  "note": ""
+ },
+ {
+  "id": "wline-baseline",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-baseline.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "wline-first-observation",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-first-observation.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": "\u00a76(1)"
+ },
+ {
+  "id": "wline-refused-regression",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-refused-regression.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": "\u00a76(2)"
+ },
+ {
+  "id": "wline-registry-signature-invalid",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-registry-signature-invalid.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": "\u00a76(2)"
+ },
+ {
+  "id": "wline-pending",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-pending.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "wline-root-flipped",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-root-flipped.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "wline-label-key-flipped",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-label-key-flipped.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": "unsigned label differs from pin"
+ },
+ {
+  "id": "wline-registry-label-deleted",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-registry-label-deleted.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "wline-created-at-deleted",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-created-at-deleted.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": "\u00a76 MUST carry created_at"
+ },
+ {
+  "id": "wline-registry-sig-bad",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-registry-sig-bad.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": "cited registry sig wrong"
+ },
+ {
+  "id": "wline-empty-file",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28717.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/generated/wline-empty.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "consistency-2^31-control",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^31-control.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^31-control.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^31-control-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^31-control.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^31-control-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^31-plus",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^31-plus.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^31-plus.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^31-plus-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^31-plus.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^31-plus-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^32-plus",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^32-plus.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^32-plus.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^32-plus-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^32-plus.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^32-plus-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^45",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^45.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^45.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^45-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^45.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^45-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-3-7",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-3-7.cp.json",
+   "--consistency",
+   "corpus/generated/tree-3-7.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-3-7-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-3-7.cp.json",
+   "--consistency",
+   "corpus/generated/tree-3-7-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-5-13",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-5-13.cp.json",
+   "--consistency",
+   "corpus/generated/tree-5-13.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-5-13-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-5-13.cp.json",
+   "--consistency",
+   "corpus/generated/tree-5-13-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-6-64",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-6-64.cp.json",
+   "--consistency",
+   "corpus/generated/tree-6-64.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-6-64-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-6-64.cp.json",
+   "--consistency",
+   "corpus/generated/tree-6-64-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-4-8",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-4-8.cp.json",
+   "--consistency",
+   "corpus/generated/tree-4-8.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-4-8-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-4-8.cp.json",
+   "--consistency",
+   "corpus/generated/tree-4-8-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-1-2",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-1-2.cp.json",
+   "--consistency",
+   "corpus/generated/tree-1-2.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "tree-1-2-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/tree-1-2.cp.json",
+   "--consistency",
+   "corpus/generated/tree-1-2-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^53-plus",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^53-plus.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^53-plus.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "consistency-2^53-plus-forged-old-root",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/consistency-2^53-plus.cp.json",
+   "--consistency",
+   "corpus/generated/consistency-2^53-plus-forged-old-root.json",
+   "--registry-key",
+   "F8t5-ytBIPKx7GXkGY1uCLKOgT_rAeSkAIObheGAgM4"
+  ],
+  "note": "PR #20 twin"
+ },
+ {
+  "id": "live2-dossier-w7",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments-28750.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments-2010Z.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "live2-dossier-w7-plus-consistency-from-witnessed-28742",
+  "args": [
+   "--dossier",
+   "corpus/record-head-of-experiments-28750.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments-2010Z.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI",
+   "--consistency",
+   "corpus/consistency-28742-28750.json"
+  ],
+  "note": "A7: witnessed older head + consistency proof"
+ },
+ {
+  "id": "live2-checkpoint-28742-w7",
+  "args": [
+   "--checkpoint",
+   "corpus/generated/checkpoint-28742.json",
+   "--registry-key",
+   "mpQPa0FjyynqoSg2Z9j91hRhb8WckxIpRGod43CQqLw",
+   "--witness",
+   "corpus/w7-head-of-experiments-2010Z.jsonl",
+   "--witness-key",
+   "BwLjer1DCxSErLiPIOG3fu0vlgmQierr2BC7f2k4TeI"
+  ],
+  "note": ""
+ },
+ {
+  "id": "rotate-vector",
+  "args": [
+   "--rotation",
+   "testvectors/witness-rotate-v1.json"
+  ],
+  "note": ""
+ },
+ {
+  "id": "rotate-missing-new-sig",
+  "args": [
+   "--rotation",
+   "corpus/generated/rotate-missing-new-sig.json"
+  ],
+  "note": "must_refuse"
+ },
+ {
+  "id": "rotate-same-key-twice",
+  "args": [
+   "--rotation",
+   "corpus/generated/rotate-same-key-twice.json"
+  ],
+  "note": "must_refuse"
+ },
+ {
+  "id": "rotate-other-witness-id",
+  "args": [
+   "--rotation",
+   "corpus/generated/rotate-other-witness-id.json"
+  ],
+  "note": "must_refuse"
+ },
+ {
+  "id": "rotate-epoch-skip",
+  "args": [
+   "--rotation",
+   "corpus/generated/rotate-epoch-skip.json"
+  ],
+  "note": "must_refuse"
+ }
+]
