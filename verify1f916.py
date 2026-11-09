@@ -18,8 +18,6 @@ MAX_SAFE = 2**53 - 1
 HEX64 = re.compile(r"\A[0-9a-f]{64}\Z")
 B64U = re.compile(r"\A[A-Za-z0-9_-]+\Z")
 DEFAULT_ORIGIN = "https://1f916.ai"
-REFUSALS = ("refused-regression", "refused-consistency-failure", "registry_signature_invalid",
-            "refused-registry-key-changed")
 
 
 class ProofError(Exception):
@@ -181,7 +179,14 @@ def mth(leaves):
 class Run:
     def __init__(self):
         self.lines, self.failed, self.anchored = [], False, False
-        self.witness_supplied = self.witness_applied = False
+        self.witness_supplied = self.witness_applied = self.witness_empty = False
+        # witness_empty: a witness file was supplied and yielded no applicable line for the
+        # head under test (nothing read, nothing set aside, nothing
+        # unavailable). Distinct from never asking: witness-unusable ranks
+        # above the unwitnessed verdicts. A file that yielded a line that
+        # bears on the head — a verifying countersignature, an unsigned copy,
+        # a first observation — does NOT set this, even when the verdict is
+        # not upgraded.
 
     def ok(self, msg):
         self.lines.append("PASS  " + msg)
@@ -244,7 +249,7 @@ def verify_dossier(run, d, reg_key):
         run.fail(f"registry signature over dossier core ({d.get('handle')})  [{src}]")
     cp = d.get("checkpoint") or {}
     log = cp.get("log", "identity_events")
-    cp_ok = check_checkpoint_sig(run, log, cp, key, src) if key else False
+    cp_ok = False
     events = d.get("events")
     if not isinstance(events, list):
         run.fail("dossier has no events array")
@@ -254,23 +259,32 @@ def verify_dossier(run, d, reg_key):
         run.fail(f"events_returned={d.get('events_returned')} but array has {len(events)}")
     if d.get("events_has_more") is False and d.get("events_total") is not None and d.get("events_total") != len(events):
         run.fail(f"events_total={d.get('events_total')} but has_more=false and array has {len(events)}")
-    proved = labeled = 0
-    for e in events:
-        eid = e.get("id")
-        if e.get("proof") is None:
-            if e.get("proof_note") or e.get("legacy_unsealed"):
-                labeled += 1
+    if d.get("checkpoint") is None:
+        # Cause A: absent and malformed are different inputs. A record with
+        # no checkpoint has nothing to diverge — skip the checkpoint
+        # signature and the inclusion proofs (the reference's
+        # `if (d.checkpoint)` guard). A present-but-malformed checkpoint
+        # still goes through check_checkpoint_sig below and fails.
+        run.info("dossier carries no checkpoint: no checkpoint signature or inclusion proofs to check")
+    else:
+        cp_ok = check_checkpoint_sig(run, log, cp, key, src) if key else False
+        proved = labeled = 0
+        for e in events:
+            eid = e.get("id")
+            if e.get("proof") is None:
+                if e.get("proof_note") or e.get("legacy_unsealed"):
+                    labeled += 1
+                    continue
+                run.fail(f"event {eid} carries neither a proof nor a label")
                 continue
-            run.fail(f"event {eid} carries neither a proof nor a label")
-            continue
-        try:
-            hex32(e.get("hash"), f"event {eid} hash")
-            verify_inclusion(e.get("leaf_index"), cp.get("tree_size"), e["hash"].encode("utf-8"), e["proof"], cp.get("root"))
-            proved += 1
-        except ProofError as ex:
-            run.fail(f"inclusion  event {eid}: {ex}")
-    if not run.failed or proved:
-        run.ok(f"{proved} event inclusion proofs verified against checkpoint size={cp.get('tree_size')} ({labeled} carried no proof, labeled)")
+            try:
+                hex32(e.get("hash"), f"event {eid} hash")
+                verify_inclusion(e.get("leaf_index"), cp.get("tree_size"), e["hash"].encode("utf-8"), e["proof"], cp.get("root"))
+                proved += 1
+            except ProofError as ex:
+                run.fail(f"inclusion  event {eid}: {ex}")
+        if not run.failed or proved:
+            run.ok(f"{proved} event inclusion proofs verified against checkpoint size={cp.get('tree_size')} ({labeled} carried no proof, labeled)")
     # attestation payload digests: integrity only, never a signature claim
     for a in d.get("attestations_about") or []:
         p, h = a.get("payload"), a.get("payload_hash")
@@ -290,64 +304,153 @@ def verify_dossier(run, d, reg_key):
 
 
 def apply_witness(run, path, wkey, origin, log, size, root, reg_key):
+    """Check the witness file against one checkpoint head.
+
+    Follows the reference's per-head state machine. Every line for this
+    (log, size) is read before anything is decided — a refusal is a veto,
+    not a vote, so it beats an accept on the next line (cause D) — and the
+    outcome is resolved once, in precedence order, at the end:
+
+      refusal > pinned verifying countersignature > verifying-but-unproven
+      countersignature (first observation, §6(1)) > mismatching copy >
+      unsigned matching copy > set-aside / unavailable / no line.
+
+    A file that yielded a line bearing on the head — a countersignature, an
+    unsigned copy, a first observation — is not "asked and empty", even when
+    the verdict is not upgraded; only set-aside / unavailable / no-line
+    outcomes mark the run witness-unusable.
+    """
     run.witness_supplied = True
     try:
         raw = open(path, "r", encoding="utf-8").read().splitlines()
     except OSError as e:
         run.info(f"witness file unreadable: {e}")
+        run.witness_empty = True
         return
-    if not wkey:
-        run.info("witness file supplied without --witness-key: a key taken from the file cannot anchor anything (§8 anchor rule); no line applied")
-        return
-    newest = None
+    # Flatten (cause E): a bare {"checkpoints": [...]} line expands into
+    # unsigned copies, one per checkpoint, exactly as verify.mjs flattens
+    # it with _unsigned: true.
+    lines = []
     for ln in raw:
         try:
             j = json.loads(ln)
         except ValueError:
             continue
-        if not isinstance(j, dict) or j.get("log") != log:
+        if not isinstance(j, dict):
+            continue
+        if isinstance(j.get("checkpoints"), list):
+            for c in j["checkpoints"]:
+                if isinstance(c, dict):
+                    lines.append(dict(c, _unsigned=True))
+            continue
+        lines.append(j)
+    newest = None
+    for j in lines:
+        if j.get("log") != log:
             continue
         if isinstance(j.get("tree_size"), int) and (newest is None or j["tree_size"] > newest):
             newest = j["tree_size"]
-        if j.get("tree_size") != size:
+    refused = None        # a refusal status for this head, if any line refused it
+    signed_ok = False     # pinned, verifying, continuity-proven countersignature
+    unproven = False      # verifying countersignature with no continuity proof
+    mismatch = False      # some line for this head carries a different root
+    unsigned_match = False  # an unsigned copy (or unpinned verifying sig) matches
+    set_aside = 0         # lines read and not counted (key mismatch)
+    unavailable = None    # a line saying the witness could not obtain a proof
+    for j in lines:
+        if j.get("log") != log or j.get("tree_size") != size:
             continue
         st = str(j.get("status", ""))
-        if st.startswith("refused") or st in REFUSALS:
-            run.fail(f"witness REFUSAL line for {log} size={size}: status={st} (§6(2): evidence against the head)")
+        # Cause C: no evidence either way. The witness writes "could not
+        # obtain a consistency proof" under a refused-* status because it
+        # refuses to sign what it did not check — correct for the witness,
+        # wrong for a reader. Checked BEFORE the refused test, so the prefix
+        # cannot swallow it. The legacy form is refused-consistency-failure
+        # with consistency starting "unavailable (".
+        if st == "refused-consistency-unavailable" or (
+                st == "refused-consistency-failure"
+                and isinstance(j.get("consistency"), str)
+                and j["consistency"].startswith("unavailable (")):
+            unavailable = j.get("consistency") or st
             continue
-        if j.get("type") != "witness-countersignature" or st != "countersigned":
-            run.info(f"witness line for size={size} has status={st!r}; not a countersignature, not applied")
+        # Cause B: a refusal fails the run whether or not a witness key was
+        # pinned (§6(2): the duty does not depend on pinning a key, because
+        # the refusal line carries no signature to anchor). Collected here,
+        # decided at the end — never returned on early.
+        if st.startswith("refused") or st == "registry_signature_invalid":
+            refused = st
             continue
-        if j.get("witness_public_key") not in (None, wkey):
-            run.fail(f"witness line key {j.get('witness_public_key')} does not match the pinned witness key")
+        if j.get("root") != root:
+            mismatch = True
             continue
-        if j.get("registry") not in (None, origin):
-            run.info(f"witness line names registry {j.get('registry')!r}, run is bound to {origin}; not applied")
-            continue
-        try:
-            hex32(j.get("root"), "witness root")
-        except ProofError as e:
-            run.fail(f"witness line: {e}")
-            continue
-        payload = f"1f916.witness.v1:{origin}:{log}:{size}:{j['root']}"
-        if not ed_verify(wkey, j.get("witness_sig"), payload):
-            run.fail(f"witness countersignature  {log} size={size}  [pinned witness key] does not verify")
-            continue
-        if j["root"] != root:
-            run.fail(f"witnessed head CONFLICTS: witness root {j['root']} != registry root {root} at size={size}")
-            continue
-        if reg_key and "created_at" in j and "registry_sig" in j:
-            if not ed_verify(reg_key, j["registry_sig"], f"1f916.checkpoint.v1:{log}:{size}:{j['root']}:{j['created_at']}"):
-                run.fail("registry signature cited by the witness line does not verify under the pinned registry key")
+        if j.get("witness_sig") and j.get("witness_public_key") and st == "countersigned":
+            if wkey and wkey != j["witness_public_key"]:
+                run.fail(f"witness line key {j.get('witness_public_key')} does not match the pinned witness key")
+                set_aside += 1
                 continue
-        if str(j.get("consistency", "")).startswith("first observation"):
-            run.info(f"witness line for size={size} is a FIRST OBSERVATION: continuity unproven, cannot ground `witnessed` (§6(1)); not applied")
+            try:
+                hex32(j.get("root"), "witness root")
+            except ProofError as e:
+                run.fail(f"witness line: {e}")
+                continue
+            # Cause G(a): the origin in the payload is the CALLER's, never
+            # the line's own `registry` field — that field is unsigned text
+            # in the same file. Verify under the caller's origin first; the
+            # label only decides when the signature does not bind it.
+            payload = f"1f916.witness.v1:{origin}:{log}:{size}:{j['root']}"
+            ok = ed_verify(j["witness_public_key"], j.get("witness_sig"), payload)
+            label_other = bool(j.get("registry")) and str(j["registry"]).rstrip("/") != origin
+            if label_other and not ok:
+                run.info(f"witness line for {log} size={size} names registry {j.get('registry')!r}, not {origin} — not about this registry, ignoring")
+                continue
+            if label_other:
+                run.info(f"witness line for {log} size={size} is labelled {j.get('registry')!r}, but its signature binds {origin}; the label is unsigned, the signature counts")
+            if not ok:
+                run.fail(f"witness countersignature  {log} size={size}  [pinned witness key] does not verify")
+                continue
+            # A countersignature over a head the witness never proved
+            # continuous ("first observation") attests only that the registry
+            # signed it. It must not carry the top verdict (§6(1)) — but it
+            # is real corroboration at a lower tier, not an absent file
+            # (cause F).
+            proven = isinstance(j.get("consistency"), str) and re.fullmatch(r"verified from \d+", j["consistency"])
+            if not proven:
+                unproven = True
+                run.info(f"witness line for size={size} is a FIRST OBSERVATION: continuity unproven, cannot ground `witnessed` (§6(1)); not applied")
+                continue
+            if wkey:
+                signed_ok = True
+                run.ok(f"witness countersignature  {log} size={size}  [pinned witness key]")
+            else:
+                # Cause B (unpinned half): a signature that verifies against
+                # a key carried in the same file proves self-consistency,
+                # not independence. Reported and capped — corroboration, and
+                # the verdict is not upgraded.
+                unsigned_match = True
+                run.info(f"countersignature verifies against the key carried in the file itself — that proves self-consistency, not independence; pin it with --witness-key to upgrade. Verdict is not upgraded.")
             continue
-        run.ok(f"witness countersignature  {log} size={size}  [pinned witness key]")
+        # Any other line for this head with a matching root is an unsigned
+        # copy: corroboration only, never a witness.
+        unsigned_match = True
+    if refused is not None:
+        run.fail(f"witness REFUSAL line for {log} size={size}: status={refused} (§6(2): evidence against the head)")
+    elif signed_ok:
         run.witness_applied = True
         run.anchored = True
-        return
-    if not run.witness_applied:
+    elif unproven:
+        run.info(f"{log} size={size}: countersigned without a continuity proof — corroboration only, verdict not upgraded")
+    elif mismatch:
+        run.fail(f"witness copy DISAGREES with the registry root at {log} size={size} — keep both files, this is evidence")
+    elif unsigned_match:
+        run.info(f"unsigned witness copy matches {log} size={size} — corroboration only; offline, this run cannot prove who wrote that file, so the verdict is not upgraded")
+    elif set_aside:
+        run.witness_empty = True
+        run.info(f"{set_aside} witness line(s) for {log} size={size} were read and not counted, for the reason given above; none corroborates this head")
+    elif unavailable is not None:
+        run.witness_empty = True
+        run.info(f"the only witness line for {log} size={size} says the witness could not obtain a consistency proof ({unavailable}) — no evidence for or against this head; try another day's file")
+    else:
+        run.witness_empty = True
         run.info(f"no applicable witness line for {log} size={size} (newest line for that log: size={newest})")
 
 
@@ -413,10 +516,14 @@ def verdict_of(run, reg_key):
         return "diverged", 1
     if run.witness_applied:
         return "witnessed", 0
+    # Cause G(b): witness-unusable ranks above the unwitnessed verdicts —
+    # "I asked and nothing arrived" outranks "I did not ask". Only a file
+    # that yielded no applicable line counts here; a corroborating line
+    # (unsigned copy, first observation) leaves witness_empty unset.
+    if run.witness_empty:
+        return "witness-unusable", 3
     if not reg_key and not run.anchored:
         return "unanchored", 0
-    if run.witness_supplied:
-        return "witness-unusable", 3
     return "consistent-unwitnessed", 0
 
 
@@ -457,7 +564,7 @@ def main(argv=None):
             cp = verify_checkpoint_file(run, load_json(a.checkpoint), a.registry_key, cons, inc)
     except (OSError, ValueError) as e:
         print(f"input unusable: {e}"); return 2
-    if a.witness:
+    if a.witness and cp:
         apply_witness(run, a.witness, a.witness_key, a.registry_origin.rstrip("/"), cp.get("log", "identity_events"),
                       cp.get("tree_size"), cp.get("root"), a.registry_key)
     v, code = verdict_of(run, a.registry_key)
