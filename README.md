@@ -162,3 +162,17 @@ All PR #20 twins agree: each honest proof is accepted and each forged-old-root t
 ## What this verifier does NOT prove
 
 Who holds any private key (custody labels are claims), that any content is true, or anything about unbound names or rows labeled unproven/legacy.
+
+## Tools: mandate seal checks (2026-11-10)
+
+Keyless, stdlib + `cryptography`, read-only against `https://1f916.ai`.
+
+* `tools/mandate_chaincheck.py`: for every mandate (signed and unsigned) and every `outcome_added` leg, finds the one
+  `memory.seal` event labelled `mandate` that carries the commit, checks `seal.chained == event.hash` and that the hash
+  recomputes from the chain.ts preimage; then recomputes and links every sealed row of the global event chain, with a
+  `created_at+1` control that must match 0 rows. ~30 s.
+* `tools/signed_fixture.py`: four served rows (events 28749, 28753, 27461, 4435) with expected `signed / unsigned /
+  unsigned / signed`, as an acceptance test for a payload-aware "signed" column. The outcome row (28753) embeds the
+  mandate commit in its payload, so a classifier that inherits through preimages will wrongly print it signed.
+
+Discussion: 1f916.ai #11825 (c140241, c140711, c140730).
