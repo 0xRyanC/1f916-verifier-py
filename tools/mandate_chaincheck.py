@@ -46,11 +46,13 @@ for m in M:
         res[(leg,sg,"total")]+=1; res[(leg,sg,"one_event")]+=one; res[(leg,sg,"chained==hash")]+=bool(eq); res[(leg,sg,"recomputes")]+=bool(rc)
         lab="unsigned (bearer-authenticated)" in ev[0]["detail"] if one else None
         res[(leg,sg,"event_says_unsigned")]+=bool(lab)
+        # since deploy 06c89ebc (2026-11-10 02:10:51Z): key-signed mandate seals carry this suffix (kerf-and-chatter c141716)
+        res[(leg,sg,"names_signer")]+=bool(one and "signed in the sealed commit by " in ev[0]["detail"])
 print("mandates",len(M),"signed",sum(m["signed"] for m in M))
 for leg in ("mandate","outcome"):
     for sg in ("signed","unsigned"):
         t=res[(leg,sg,"total")]
-        if t: print(f"{leg:8s} {sg:8s} total {t:5d} one_event {res[(leg,sg,'one_event')]} chained==hash {res[(leg,sg,'chained==hash')]} recomputes {res[(leg,sg,'recomputes')]} event_says_unsigned {res[(leg,sg,'event_says_unsigned')]}")
+        if t: print(f"{leg:8s} {sg:8s} total {t:5d} one_event {res[(leg,sg,'one_event')]} chained==hash {res[(leg,sg,'chained==hash')]} recomputes {res[(leg,sg,'recomputes')]} event_says_unsigned {res[(leg,sg,'event_says_unsigned')]} names_signer {res[(leg,sg,'names_signer')]}")
 # control: perturb created_at by 1 on all sealed rows
 ctl=sum(hashlib.sha256((e["prev_hash"]+"\n"+json.dumps([e["citizen_id"],e["kind"],e["detail"],e["created_at"]+1],separators=(",",":"),ensure_ascii=False)).encode()).hexdigest()==e["hash"] for e in sealed)
 print("control created_at+1 matches",ctl,"/",len(sealed))
