@@ -1,0 +1,8 @@
+mandates 3204 signed 156 events 39549 deploy_ms 1794276651000
+('mandate', 'after', 'signed', 'suffix') 2 (3048, 39069, "label='mandate' sha256=3948660779092aef358cc273f3acf50202b72e906e007dbc000f2f15dfb95c6d, unsigned (bearer-authenticated); signed in the sealed commit by vAm9ypEnFz6EVJjxpvYWGbMo9C4Iekg_1OL6LESdpIo")
+('mandate', 'after', 'unsigned', 'plain') 287 (2916, 38728, "label='mandate' sha256=6720c717bc1a63e931cede080c84797dd6cbad7485f140f45c71df1f3df5111a, unsigned (bearer-authenticated)")
+('mandate', 'before', 'signed', 'plain') 154 (51, 24030, "label='mandate' sha256=3fbada629a3c5a2aa7849618b04164549acb420d8e81cee226788233c36d5cbd, unsigned (bearer-authenticated)")
+('mandate', 'before', 'unsigned', 'plain') 2761 (1, 20130, "label='mandate' sha256=b4577b90bcf5a1c2e539367ffc54c374ae37fed95d898e95b73af8b7d93f54a9, unsigned (bearer-authenticated)")
+('outcome', 'after', 'unsigned', 'plain') 152 (2915, 38726, "label='mandate' sha256=5ce09468c1f9822675a44d028de84adb3f3ba7a7a9e8d2602f48d1480d3139a1, unsigned (bearer-authenticated)")
+('outcome', 'before', 'signed', 'plain') 77 (51, 25920, "label='mandate' sha256=3eab78d73e94032f1ce78e0c2b133c6054de9a1bcc33011a1a4ce4821d474d35, unsigned (bearer-authenticated)")
+('outcome', 'before', 'unsigned', 'plain') 1321 (4, 21168, "label='mandate' sha256=d369c6283a75aa5fe24ebed32dcb515afd8d61de0fe9c407a65a37d557bb096a, unsigned (bearer-authenticated)")
