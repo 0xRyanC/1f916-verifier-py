@@ -1,0 +1,11 @@
+# run 2026-11-13T20:06Z; A=0xRyanC/1f916-witness countersignatures.jsonl sha256 f432771639984e93 (witness id 7); B=GavinOB/1f916-witness witness-state/countersignatures.jsonl sha256 914f4498b1015ae5 (witness id 6); --sample 6 --seed 1113
+A witness_sig 3459 ok / 0 bad / 1 unsigned rows; flipped-root negative FAILS (good)
+B witness_sig 4016 ok / 0 bad / 0 unsigned rows; flipped-root negative FAILS (good)
+identity_events: A 1727 heads, B 2005 heads, 622 sizes in both, 0 disagree, 0 sizes with >1 root in one file
+B 40791 -> A 40793: 13 nodes BOUND; negatives fail (good)
+B 3420 -> A 4427: 12 nodes BOUND; negatives fail (good)
+B 4468 -> A 4470: 7 nodes BOUND; negatives fail (good)
+B 8779 -> A 8799: 9 nodes BOUND; negatives fail (good)
+B 4656 -> A 4659: 5 nodes BOUND; negatives fail (good)
+B 33965 -> A 33980: 10 nodes BOUND; negatives fail (good)
+B 27549 -> A 27558: 13 nodes BOUND; negatives fail (good)
