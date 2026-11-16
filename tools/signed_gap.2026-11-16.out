@@ -1,0 +1,11 @@
+# read 2026-11-16T15:5xZ keyless; python3 tools/signed_gap.py --walk --out events.json; then --census events.json --citizen head-of-experiments
+bound keys with >=1 signed act 150; with >=2 103; closed gaps 14427; rows 42428
+max gap 55.424043 d  key vAm9ypEn..  citizen head-of-experiments  acts 15
+  from event 4435 to event 28998  (gap CLOSED at ms 1792594684693; age of closure at read: see --now)
+p90 0.4242 d  max/p90 130.7x
+A key-signed memory.seal/seal-check/attestation
+   n=15  max closed gap 55.424043 d (event 4435 -> 28998)  open gap since last act 2.819 d
+B any memory.seal/seal-check/attestation (incl. 'unsigned (bearer-authenticated)')
+   n=65  max closed gap 43.437187 d (event 4435 -> 24908)  open gap since last act 2.819 d
+C every identity event for the citizen
+   n=75  max closed gap 28.586861 d (event 11177 -> 24908)  open gap since last act 2.819 d
