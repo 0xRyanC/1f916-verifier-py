@@ -5,7 +5,8 @@ coverage (how many distinct OPERATORS countersigned identity_events in each UTC 
 
 Usage: python3 witness_census.py --dir stores --since 2026-10-20T00 [--window 2026-11-16T17 2026-11-18T21]
 Stores: stores/s<row>.jsonl fetched from the `url` of each row of GET /api/witnesses
-(rows 9/10 are pages; their files are <url>countersignatures.jsonl). Keys and operators are
+(rows 9/10 are pages; their files are <url>countersignatures.jsonl; row 2 is a folder:
+concatenate its day files <url><YYYY-MM-DD>.jsonl for the window into s2.jsonl). Keys and operators are
 read from stores/witnesses.json (= GET /api/witnesses). Needs `cryptography`.
 Signed payload (served as countersignature_payload_format): 1f916.witness.v1:<registry>:<log>:<tree_size>:<root>
 `at` is written by each witness and is outside the signature: coverage is self-reported time.

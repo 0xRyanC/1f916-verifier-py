@@ -1,12 +1,14 @@
-# run 2026-11-19T15:50Z; stores fetched 2026-11-19 ~15:50-15:55Z from the url of each GET /api/witnesses row (9/10: <url>countersignatures.jsonl); sha256:
+# run 2026-11-19T15:51Z; stores fetched 2026-11-19 15:50-16:00Z from the url of each GET /api/witnesses row (9/10: <url>countersignatures.jsonl; 2: day files 2026-10-20..11-19 concatenated); rows 1/3 404, 4/5/13-15 no key; sha256:
 #  s10.jsonl 0a0513147fad2d01
 #  s11.jsonl 51f9d444a3ed1d07
 #  s12.jsonl 2d697d0a98ab8dab
+#  s2.jsonl f68ab4967fb82769
 #  s6.jsonl 56393074d1abc9be
 #  s7.jsonl 13d41ad1608ea4a5
 #  s8.jsonl 71fc5976c772b4d5
 #  s9.jsonl 07355d73e982d6dc
 row operator        rows_ie  sig_ok  sig_bad  max_size  first_at             last_at
+  2 1f916-agent         249     249        0     43877  2026-10-20T00:16:41.649Z  2026-11-19T13:34:56.246Z
   6 commonwealth       2148    2148        0     43905  2026-08-22T05:14:52.134Z  2026-11-19T15:07:09.118Z
   7 head-of-experiments    1815    1815        0     43891  2026-08-27T05:10:11.282Z  2026-11-19T14:12:06.808Z
   8 liveness           6291    6291        0     43917  2026-09-08T05:40:15.230Z  2026-11-19T15:37:02.420Z
@@ -15,12 +17,12 @@ row operator        rows_ie  sig_ok  sig_bad  max_size  first_at             las
  11 glm-flash-agent     191     191        0     43866  2026-10-05T23:15:47.504Z  2026-11-19T13:13:47.649Z
  12 legate             1294    1294        0     43858  2026-10-02T19:52:02.551Z  2026-11-19T12:49:15.474Z
 
-exact sizes held by >=2 stores: 2860 (by #stores {2: 2002, 3: 699, 4: 137, 5: 19, 6: 3}); sizes with >1 root: 0
-coverage 2026-10-20T00Z..2026-11-19T14Z: 735 h; distinct operators per hour -> 1:1, 2:59, 3:272, 4:292, 5:99, 6:12
+exact sizes held by >=2 stores: 2951 (by #stores {2: 2020, 3: 746, 4: 157, 5: 19, 6: 8, 7: 1}); sizes with >1 root: 0
+coverage 2026-10-20T00Z..2026-11-19T14Z: 735 h; distinct operators per hour -> 1:1, 2:57, 3:247, 4:187, 5:174, 6:57, 7:12
   hours with <=1 operator: [('2026-11-18T01', ['commonwealth'])] 
-window 2026-11-16T17Z..2026-11-18T21Z: 53 h; distinct operators per hour -> 1:1, 2:32, 3:16, 4:4
-  operator-hours in window: {'commonwealth': 53, 'liveness': 52, 'legate': 17, 'glm-flash-agent': 7}
-# outage bridge (seat 7 42421->43491) via seat 6 heads:
+window 2026-11-16T17Z..2026-11-18T21Z: 53 h; distinct operators per hour -> 1:1, 2:31, 3:10, 4:7, 5:4
+  operator-hours in window: {'commonwealth': 53, 'liveness': 52, 'legate': 17, '1f916-agent': 12, 'glm-flash-agent': 7}
+# outage bridge (seat 7 42421->43491) via seat 6 heads (RFC 9162 consistency, /api/checkpoint/consistency, roots from the two files):
 seat6 heads inside gap 54 42444 43490
 seat7->seat7 (our bridge) 42421->43491: 15 nodes, VERIFIES; negatives flip=False from-1=False
 seat7->seat6 first-in-gap 42421->42444: 13 nodes, VERIFIES; negatives flip=False from-1=False
