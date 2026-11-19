@@ -1,0 +1,22 @@
+encodings 14 (canonical 8 )
+key-bind             total  1197 walked  1197 thumbprints  1197 distinct  1197 small-order hits 1  read 2026-11-19T19:58:51.952Z
+   hit event (2946, 'prometheus', 'ogRZbCR5KTrPFCAfuYmCMwj0w7Yuk3Lr6YWQWfpkbf0', 4, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+key-rotate           total     1 walked     1 thumbprints     2 distinct     2 small-order hits 0  read 2026-11-19T19:58:52.135Z
+key_rotation         total   132 walked   132 thumbprints     0 distinct     0 small-order hits 0  read 2026-11-19T19:58:52.305Z
+key-revoke           total    16 walked    16 thumbprints    16 distinct    16 small-order hits 1  read 2026-11-19T19:58:52.515Z
+   hit event (2948, 'prometheus', 'ogRZbCR5KTrPFCAfuYmCMwj0w7Yuk3Lr6YWQWfpkbf0', 4, 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+key-custody-declare  total    22 walked    22 thumbprints    22 distinct    20 small-order hits 0  read 2026-11-19T19:58:52.709Z
+1 canonical AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA eV9frzBXPTP92MWWMpoFOh0WI_kJLvGlhcNs15APU_s
+1 non-canonical AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA Np_ADZ8OGjghKLy3vFQKKZuqbzT86guBbRHu3O815WU
+1 non-canonical 7v_______________________________________38 UqnBYPqz_n47zVtZ0nFslEBmgGeldyTEu6vwR5b6nl0
+1 non-canonical 7v________________________________________8 uDS4D5v5WuodnoMxIZ5IFYf0Cveykc08TlArscwy5W8
+2 canonical 7P_______________________________________38 Jwj2Wm3WQnidt0c7l__0Uyozch0IAYaYe0v8FTzd9rQ
+2 non-canonical 7P________________________________________8 LrXZeKn1ZceeRqZQ28kjbYhisPQlI6pxREB-HCTn_A4
+8 canonical JuiVj8KyJ7BFw_SJ8u-Y8NXfrAXTxjM5sTgCiG1T_AU qJ-1d7w4R2fnFuNnhqNZBpbrJssiCqAHfmlfkH8BNXI
+8 canonical xxdqcD1N2E-6PAt2DRBnDyogU_osOczGTsf9d5KsA3o dAPCOUA-LvEuseWdWqPioC71rWjJw4j_MI5dFJlRpPk
+4 canonical AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ogRZbCR5KTrPFCAfuYmCMwj0w7Yuk3Lr6YWQWfpkbf0
+4 non-canonical 7f_______________________________________38 HfjNXWWp2Joe9cH0xpWIAhVaMOsKQclqQfTnrYRgHjg
+4 canonical AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA _u1ng0q0KLy_N7DwZ7DMzsFWyjKNY3yBQ4yFvRDsZ-w
+4 non-canonical 7f________________________________________8 L_udSqlR1FhicFsQ1K2AQiME29Y0aWdTTtKxgw8dkok
+8 canonical JuiVj8KyJ7BFw_SJ8u-Y8NXfrAXTxjM5sTgCiG1T_IU bDH1Afa0E-_i5FdqcYcF-Gd4wskzTomjkvkrHyaRXcE
+8 canonical xxdqcD1N2E-6PAt2DRBnDyogU_osOczGTsf9d5KsA_o oVsNDk47mrIVSWGLMk_P85AnQ273cqKhQJ2cxGCCGnY
