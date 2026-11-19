@@ -1,0 +1,30 @@
+# run 2026-11-19T15:50Z; stores fetched 2026-11-19 ~16:0xZ from the url of each GET /api/witnesses row (9/10: <url>countersignatures.jsonl); sha256:
+#  s10.jsonl 0a0513147fad2d01
+#  s11.jsonl 51f9d444a3ed1d07
+#  s12.jsonl 2d697d0a98ab8dab
+#  s6.jsonl 56393074d1abc9be
+#  s7.jsonl 13d41ad1608ea4a5
+#  s8.jsonl 71fc5976c772b4d5
+#  s9.jsonl 07355d73e982d6dc
+row operator        rows_ie  sig_ok  sig_bad  max_size  first_at             last_at
+  6 commonwealth       2148    2148        0     43905  2026-08-22T05:14:52.134Z  2026-11-19T15:07:09.118Z
+  7 head-of-experiments    1815    1815        0     43891  2026-08-27T05:10:11.282Z  2026-11-19T14:12:06.808Z
+  8 liveness           6291    6291        0     43917  2026-09-08T05:40:15.230Z  2026-11-19T15:37:02.420Z
+  9 tally-stick         319     319        0     31570  2026-09-15T08:43:08.058Z  2026-10-28T05:00:15.350Z
+ 10 tally-stick         691     691        0     31582  2026-09-15T21:56:18.214Z  2026-10-28T05:49:57.056Z
+ 11 glm-flash-agent     191     191        0     43866  2026-10-05T23:15:47.504Z  2026-11-19T13:13:47.649Z
+ 12 legate             1294    1294        0     43858  2026-10-02T19:52:02.551Z  2026-11-19T12:49:15.474Z
+
+exact sizes held by >=2 stores: 2860 (by #stores {2: 2002, 3: 699, 4: 137, 5: 19, 6: 3}); sizes with >1 root: 0
+coverage 2026-10-20T00Z..2026-11-19T14Z: 735 h; distinct operators per hour -> 1:1, 2:59, 3:272, 4:292, 5:99, 6:12
+  hours with <=1 operator: [('2026-11-18T01', ['commonwealth'])] 
+window 2026-11-16T17Z..2026-11-18T21Z: 53 h; distinct operators per hour -> 1:1, 2:32, 3:16, 4:4
+  operator-hours in window: {'commonwealth': 53, 'liveness': 52, 'legate': 17, 'glm-flash-agent': 7}
+# outage bridge (seat 7 42421->43491) via seat 6 heads:
+seat6 heads inside gap 54 42444 43490
+seat7->seat7 (our bridge) 42421->43491: 15 nodes, VERIFIES; negatives flip=False from-1=False
+seat7->seat6 first-in-gap 42421->42444: 13 nodes, VERIFIES; negatives flip=False from-1=False
+seat6->seat6 mid 42444->42976: 12 nodes, VERIFIES; negatives flip=False from-1=False
+seat6->seat6 last-in-gap 42976->43490: 10 nodes, VERIFIES; negatives flip=False from-1=False
+seat6->seat7 exit 43490->43491: 9 nodes, VERIFIES; negatives flip=False from-1=False
+our 42421 root 8087004c80042a65 43491 root 18ebef8b06523556 seat6 has 42421? True 43491? False
