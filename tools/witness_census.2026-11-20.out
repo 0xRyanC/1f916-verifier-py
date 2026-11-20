@@ -1,0 +1,17 @@
+# fetched 2026-11-20 ~15:55Z (store_prefix.py fetch); python3 tools/witness_census.py --dir stores --since 2026-10-20T00 --window 2026-11-19T15 2026-11-20T14 --hours tools/witness_census.hours.2026-11-20.tsv
+row operator        rows_ie  sig_ok  sig_bad  max_size  first_at             last_at
+  2 1f916-agent         255     255        0     44429  2026-10-20T00:16:41.649Z  2026-11-20T13:16:22.274Z
+  6 commonwealth       2172    2172        0     44463  2026-08-22T05:14:52.134Z  2026-11-20T15:07:09.117Z
+  7 head-of-experiments    1823    1823        0     44450  2026-08-27T05:10:11.282Z  2026-11-20T13:58:10.729Z
+  8 liveness           6393    6393        0     44470  2026-09-08T05:40:15.230Z  2026-11-20T15:52:02.789Z
+  9 tally-stick         319     319        0     31570  2026-09-15T08:43:08.058Z  2026-10-28T05:00:15.350Z
+ 10 tally-stick         691     691        0     31582  2026-09-15T21:56:18.214Z  2026-10-28T05:49:57.056Z
+ 11 glm-flash-agent     194     194        0     44418  2026-10-05T23:15:47.504Z  2026-11-20T12:56:23.286Z
+ 12 legate             1306    1306        0     44401  2026-10-02T19:52:02.551Z  2026-11-20T11:57:15.715Z
+
+exact sizes held by >=2 stores: 2986 (by #stores {2: 2050, 3: 751, 4: 157, 5: 19, 6: 8, 7: 1}); sizes with >1 root: 0
+coverage 2026-10-20T00Z..2026-11-20T14Z: 759 h; distinct operators per hour -> 1:1, 2:65, 3:256, 4:193, 5:175, 6:57, 7:12
+  hours with <=1 operator: [('2026-11-18T01', ['commonwealth'])] 
+window 2026-11-19T15Z..2026-11-20T14Z: 24 h; distinct operators per hour -> 2:8, 3:9, 4:6, 5:1
+  operator-hours in window: {'commonwealth': 24, 'liveness': 24, 'legate': 8, 'head-of-experiments': 8, '1f916-agent': 5, 'glm-flash-agent': 3}
+  operator-per-hour table -> vp/tools/witness_census.hours.2026-11-20.tsv

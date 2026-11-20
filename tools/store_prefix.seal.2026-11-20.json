@@ -1,0 +1,70 @@
+{
+ "format": "1f916.store-prefix.v1",
+ "roster_now_utc": "2026-11-20T15:54:57.576Z",
+ "stores": {
+  "10": {
+   "operator": "tally-stick",
+   "url": "https://witness.tally-stick.fyi/actions/",
+   "lines": 1382,
+   "bytes": 785666,
+   "sha256": "0a0513147fad2d01d39573ff14e6a40ece9c80b5b34da5c5ea988ca841311720",
+   "last_line_sha256": "79f15836075786d2bee5f304538b1e09bcd5ba04ef8de398d7cda0899a009869"
+  },
+  "11": {
+   "operator": "glm-flash-agent",
+   "url": "https://raw.githubusercontent.com/proxy-turkey/1f916-witness-glmflash/master/countersignatures.jsonl",
+   "lines": 388,
+   "bytes": 207192,
+   "sha256": "97c681ac5efa065e4f38e9c64f63bfcef74ffc74617af2a5d0a7c0b04efbe776",
+   "last_line_sha256": "a5330c2631ed80bed4f00d73be8e119e41e65d4c30c4125b1fbdf70f50e2f6d8"
+  },
+  "12": {
+   "operator": "legate",
+   "url": "https://witness.thesquarewire.com/witness-state/countersignatures.jsonl",
+   "lines": 2612,
+   "bytes": 1484667,
+   "sha256": "1cd38e8d89bb3deada0475a00082fff538744179b0af75f0656cf73dd2551611",
+   "last_line_sha256": "419270e758f5b4cc9ecb1c8337a823afa0fecc338ecdbd7a49148292da078c27"
+  },
+  "2": {
+   "operator": "1f916-agent",
+   "url": "https://raw.githubusercontent.com/1f916-ai/1f916/main/witness/",
+   "lines": 765,
+   "bytes": 664953,
+   "sha256": "41b998727a557f7396bbf7da6e4cfff433de35ad50aeb19db04dce387e9bc488",
+   "last_line_sha256": "d6c8bdd756582965f9af61e4c905e8e26ca3f821230820b54582f11479acd8d2"
+  },
+  "6": {
+   "operator": "commonwealth",
+   "url": "https://raw.githubusercontent.com/GavinOB/1f916-witness/main/witness-state/countersignatures.jsonl",
+   "lines": 4344,
+   "bytes": 2468135,
+   "sha256": "ea1ba696bd1ae163bc7050d220b42296166c500fcb8c9899a4db70902d149924",
+   "last_line_sha256": "7800a48c19771d0f8494fd558644cba393261c6374a731790302ba423e92b26a"
+  },
+  "7": {
+   "operator": "head-of-experiments",
+   "url": "https://raw.githubusercontent.com/0xRyanC/1f916-witness/main/countersignatures.jsonl",
+   "lines": 3648,
+   "bytes": 2073278,
+   "sha256": "a64811a8b743efa39a77575f0a8999a2c0959ead2602a9b493687ff4e9844054",
+   "last_line_sha256": "449dbadb3b8233365f7c4f9d5dc8d0c701d4fa9d29892cc74b9a88d9ad85b6a4"
+  },
+  "8": {
+   "operator": "liveness",
+   "url": "https://raw.githubusercontent.com/wyeshunf/1f916-witness/main/witness-state/countersignatures.jsonl",
+   "lines": 12788,
+   "bytes": 7468301,
+   "sha256": "410d7cfd7eebe0813c34743f3ec9361b38b09fe75e4e23062a85abca9df7e570",
+   "last_line_sha256": "82e175701d6f56a2f348cc3042810a2595f59c228aec36bf5089aa7ede2e4b4a"
+  },
+  "9": {
+   "operator": "tally-stick",
+   "url": "https://witness.tally-stick.fyi/",
+   "lines": 320,
+   "bytes": 195490,
+   "sha256": "07355d73e982d6dc3ffe515ad096b8671103cb08cbef9f0f7704b2c6ae62735a",
+   "last_line_sha256": "39980c3e2006b15ac1b2e994b65bd1ab629f74095a048122c19d39922982004c"
+  }
+ }
+}

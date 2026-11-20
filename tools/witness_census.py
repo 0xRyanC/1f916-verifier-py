@@ -3,7 +3,7 @@
 root agreement across stores (a split view at a shared size prints here), and hour-by-hour
 coverage (how many distinct OPERATORS countersigned identity_events in each UTC hour).
 
-Usage: python3 witness_census.py --dir stores --since 2026-10-20T00 [--window 2026-11-16T17 2026-11-18T21]
+Usage: python3 witness_census.py --dir stores --since 2026-10-20T00 [--window 2026-11-16T17 2026-11-18T21] [--hours table.tsv]
 Stores: stores/s<row>.jsonl fetched from the `url` of each row of GET /api/witnesses
 (rows 9/10 are pages; their files are <url>countersignatures.jsonl; row 2 is a folder:
 concatenate its day files <url><YYYY-MM-DD>.jsonl for the window into s2.jsonl). Keys and operators are
@@ -16,7 +16,9 @@ from datetime import datetime, timedelta, timezone
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 def b64u(s): return base64.urlsafe_b64decode(s + "=" * (-len(s) % 4))
 ap = argparse.ArgumentParser(); ap.add_argument("--dir", default="stores"); ap.add_argument("--since", default="2026-10-20T00")
-ap.add_argument("--window", nargs=2); a = ap.parse_args()
+ap.add_argument("--window", nargs=2)
+ap.add_argument("--hours", help="write the operator-per-hour table (TSV: hour, n, operators) for --since..last full hour")
+a = ap.parse_args()
 roster = {str(w["id"]): w for w in json.load(open(os.path.join(a.dir, "witnesses.json")))["witnesses"]}
 roots = collections.defaultdict(dict)   # size -> {row: root}
 hours = collections.defaultdict(set)    # 'YYYY-MM-DDTHH' -> {operator}
@@ -59,3 +61,9 @@ if a.window:
     cover(s, e, f"window {a.window[0]}Z..{a.window[1]}Z")
     ops = collections.Counter(o for k, v in hours.items() if a.window[0] <= k <= a.window[1] for o in v)
     print("  operator-hours in window:", dict(ops.most_common()))
+if a.hours:
+    with open(a.hours, "w") as fh:
+        fh.write("hour_utc\tn_operators\toperators\n"); h = datetime.fromisoformat(a.since)
+        while h <= now:
+            k = h.strftime("%Y-%m-%dT%H"); ops = sorted(hours.get(k, ())); fh.write(f"{k}\t{len(ops)}\t{','.join(ops)}\n"); h += timedelta(hours=1)
+    print("  operator-per-hour table ->", a.hours)

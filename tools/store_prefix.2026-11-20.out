@@ -1,0 +1,28 @@
+# python3 tools/store_prefix.py check tools/store_prefix.seal.2026-11-19.json stores   (stores fetched 2026-11-20 ~15:55Z by: store_prefix.py fetch stores)
+# 11-19 seal computed from our 2026-11-19 ~15:49Z copies (the ones behind witness_census.2026-11-19.out); it was not published then, so treat it as our testimony; the 11-20 seal is the first one published at seal time
+sealed at roster time 2026-11-19T15:47:39.760Z; new copy stores
+row operator          sealed_n   new_n  appended  prefix
+  2 1f916-agent           747     765        18  INTACT
+  6 commonwealth         4296    4344        48  INTACT
+  7 head-of-experiments     3632    3648        16  INTACT
+  8 liveness            12584   12788       204  INTACT
+  9 tally-stick           320     320         0  INTACT
+ 10 tally-stick          1382    1382         0  INTACT
+ 11 glm-flash-agent       382     388         6  INTACT
+ 12 legate               2588    2612        24  INTACT
+
+8 intact, 0 rewritten or shorter
+
+# negative control: same seal vs a copy with row 6 line 101 edited (one byte) and row 11 line 6 deleted
+sealed at roster time 2026-11-19T15:47:39.760Z; new copy neg
+row operator          sealed_n   new_n  appended  prefix
+  2 1f916-agent           747     765        18  INTACT
+  6 commonwealth         4296    4344        48  REWRITTEN
+  7 head-of-experiments     3632    3648        16  INTACT
+  8 liveness            12584   12788       204  INTACT
+  9 tally-stick           320     320         0  INTACT
+ 10 tally-stick          1382    1382         0  INTACT
+ 11 glm-flash-agent       382     387         5  REWRITTEN
+ 12 legate               2588    2612        24  INTACT
+
+6 intact, 2 rewritten or shorter
