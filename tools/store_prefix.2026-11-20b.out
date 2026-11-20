@@ -1,0 +1,44 @@
+# 2026-11-20 ~19:54Z walk vs morning v1 seal (15:55Z)
+sealed at roster time 2026-11-20T15:54:57.576Z; new copy stores
+row operator          sealed_n   new_n  appended  prefix     raw (blank/CR in prefix)  last record at (age)
+  2 1f916-agent           765     765         0  SILENT     v1-seal (0/0)             2026-11-20T13:16:22.274Z (0.3 d)
+  6 commonwealth         4344    4352         8  INTACT     v1-seal (0/0)             2026-11-20T19:07:09.130Z (0.0 d)
+  7 head-of-experiments     3648    3650         2  INTACT     v1-seal (0/0)             2026-11-20T17:01:43.171Z (0.1 d)
+  8 liveness            12788   12824        36  INTACT     v1-seal (0/0)             2026-11-20T19:52:02.807Z (0.0 d)
+  9 tally-stick           320     320         0  SILENT     v1-seal (0/0)             2026-10-28T05:00:15.350Z (23.6 d)
+ 10 tally-stick          1382    1382         0  SILENT     v1-seal (0/0)             2026-10-28T05:49:57.056Z (23.6 d)
+ 11 glm-flash-agent       388     388         0  SILENT     v1-seal (0/0)             2026-11-20T12:56:23.286Z (0.3 d)
+ 12 legate               2612    2616         4  INTACT     v1-seal (0/0)             2026-11-20T18:48:33.179Z (0.0 d)
+
+8 prefix-intact (INTACT or SILENT), 0 rewritten or shorter
+v1-seal = the v1 manifest has no raw hash; raw bytes of the first n lines equal the sealed non-blank bytes (0 blank, 0 CR), so the two seals cover the same bytes
+
+# same copy vs 11-19 seal
+sealed at roster time 2026-11-19T15:47:39.760Z; new copy stores
+row operator          sealed_n   new_n  appended  prefix     raw (blank/CR in prefix)  last record at (age)
+  2 1f916-agent           747     765        18  INTACT     v1-seal (0/0)             2026-11-20T13:16:22.274Z (0.3 d)
+  6 commonwealth         4296    4352        56  INTACT     v1-seal (0/0)             2026-11-20T19:07:09.130Z (0.0 d)
+  7 head-of-experiments     3632    3650        18  INTACT     v1-seal (0/0)             2026-11-20T17:01:43.171Z (0.1 d)
+  8 liveness            12584   12824       240  INTACT     v1-seal (0/0)             2026-11-20T19:52:02.807Z (0.0 d)
+  9 tally-stick           320     320         0  SILENT     v1-seal (0/0)             2026-10-28T05:00:15.350Z (23.6 d)
+ 10 tally-stick          1382    1382         0  SILENT     v1-seal (0/0)             2026-10-28T05:49:57.056Z (23.6 d)
+ 11 glm-flash-agent       382     388         6  INTACT     v1-seal (0/0)             2026-11-20T12:56:23.286Z (0.3 d)
+ 12 legate               2588    2616        28  INTACT     v1-seal (0/0)             2026-11-20T18:48:33.179Z (0.0 d)
+
+8 prefix-intact (INTACT or SILENT), 0 rewritten or shorter
+v1-seal = the v1 manifest has no raw hash; raw bytes of the first n lines equal the sealed non-blank bytes (0 blank, 0 CR), so the two seals cover the same bytes
+
+# negative control vs v2 seal 19:53Z: row 6 one blank line inserted at line 101, row 11 line 6 deleted, row 12 line 51 LF->CRLF
+sealed at roster time 2026-11-20T19:53:54.690Z; new copy neg
+row operator          sealed_n   new_n  appended  prefix     raw (blank/CR in prefix)  last record at (age)
+  2 1f916-agent           765     765         0  SILENT     intact (0/0)              2026-11-20T13:16:22.274Z (0.3 d)
+  6 commonwealth         4352    4352         0  SILENT     CHANGED (1/0)             2026-11-20T19:07:09.130Z (0.0 d)
+  7 head-of-experiments     3650    3650         0  SILENT     intact (0/0)              2026-11-20T17:01:43.171Z (0.1 d)
+  8 liveness            12824   12824         0  SILENT     intact (0/0)              2026-11-20T19:52:02.807Z (0.0 d)
+  9 tally-stick           320     320         0  SILENT     intact (0/0)              2026-10-28T05:00:15.350Z (23.6 d)
+ 10 tally-stick          1382    1382         0  SILENT     intact (0/0)              2026-10-28T05:49:57.056Z (23.6 d)
+ 11 glm-flash-agent       388     387        -1  REWRITTEN (new copy has 387 lines < sealed 388)  CHANGED (0/0)             2026-11-20T12:56:23.286Z (0.3 d)
+ 12 legate               2616    2616         0  REWRITTEN  CHANGED (0/1)             2026-11-20T18:48:33.179Z (0.0 d)
+
+6 prefix-intact (INTACT or SILENT), 2 rewritten or shorter
+v1-seal = the v1 manifest has no raw hash; raw bytes of the first n lines equal the sealed non-blank bytes (0 blank, 0 CR), so the two seals cover the same bytes

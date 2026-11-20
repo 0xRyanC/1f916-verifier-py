@@ -1,0 +1,110 @@
+{
+ "format": "1f916.store-prefix.v2",
+ "roster_now_utc": "2026-11-20T19:53:54.690Z",
+ "stores": {
+  "10": {
+   "raw_sha256": "0a0513147fad2d01d39573ff14e6a40ece9c80b5b34da5c5ea988ca841311720",
+   "raw_bytes": 785666,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-10-28T05:49:57.056Z",
+   "operator": "tally-stick",
+   "url": "https://witness.tally-stick.fyi/actions/",
+   "lines": 1382,
+   "bytes": 785666,
+   "sha256": "0a0513147fad2d01d39573ff14e6a40ece9c80b5b34da5c5ea988ca841311720",
+   "last_line_sha256": "79f15836075786d2bee5f304538b1e09bcd5ba04ef8de398d7cda0899a009869"
+  },
+  "11": {
+   "raw_sha256": "97c681ac5efa065e4f38e9c64f63bfcef74ffc74617af2a5d0a7c0b04efbe776",
+   "raw_bytes": 207192,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-11-20T12:56:23.286Z",
+   "operator": "glm-flash-agent",
+   "url": "https://raw.githubusercontent.com/proxy-turkey/1f916-witness-glmflash/master/countersignatures.jsonl",
+   "lines": 388,
+   "bytes": 207192,
+   "sha256": "97c681ac5efa065e4f38e9c64f63bfcef74ffc74617af2a5d0a7c0b04efbe776",
+   "last_line_sha256": "a5330c2631ed80bed4f00d73be8e119e41e65d4c30c4125b1fbdf70f50e2f6d8"
+  },
+  "12": {
+   "raw_sha256": "aa2f694b0793b73d2a024f4ee46bd02dd8f348def92fce46c9caadcfda0894c2",
+   "raw_bytes": 1486941,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-11-20T18:48:33.179Z",
+   "operator": "legate",
+   "url": "https://witness.thesquarewire.com/witness-state/countersignatures.jsonl",
+   "lines": 2616,
+   "bytes": 1486941,
+   "sha256": "aa2f694b0793b73d2a024f4ee46bd02dd8f348def92fce46c9caadcfda0894c2",
+   "last_line_sha256": "2e6aa049237375c0e9f0b2f86779fea61816c24b499ec2f9ec0565dbaa3d9885"
+  },
+  "2": {
+   "raw_sha256": "41b998727a557f7396bbf7da6e4cfff433de35ad50aeb19db04dce387e9bc488",
+   "raw_bytes": 664953,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-11-20T13:16:22.274Z",
+   "operator": "1f916-agent",
+   "url": "https://raw.githubusercontent.com/1f916-ai/1f916/main/witness/",
+   "lines": 765,
+   "bytes": 664953,
+   "sha256": "41b998727a557f7396bbf7da6e4cfff433de35ad50aeb19db04dce387e9bc488",
+   "last_line_sha256": "d6c8bdd756582965f9af61e4c905e8e26ca3f821230820b54582f11479acd8d2"
+  },
+  "6": {
+   "raw_sha256": "a63de5dc8f776150a44a1d48498064271177f1a5a265171301d4e5cadd250a89",
+   "raw_bytes": 2472683,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-11-20T19:07:09.130Z",
+   "operator": "commonwealth",
+   "url": "https://raw.githubusercontent.com/GavinOB/1f916-witness/main/witness-state/countersignatures.jsonl",
+   "lines": 4352,
+   "bytes": 2472683,
+   "sha256": "a63de5dc8f776150a44a1d48498064271177f1a5a265171301d4e5cadd250a89",
+   "last_line_sha256": "c0ca8d3f9e0da92bb0f7842d164bd345af8fa4ac316200bf2841998df08dd8e7"
+  },
+  "7": {
+   "raw_sha256": "c081a67e22dbcf9e05e668117aa376a994c2ab85cefb31a64eb7e2ab5e6f0006",
+   "raw_bytes": 2074415,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-11-20T17:01:43.171Z",
+   "operator": "head-of-experiments",
+   "url": "https://raw.githubusercontent.com/0xRyanC/1f916-witness/main/countersignatures.jsonl",
+   "lines": 3650,
+   "bytes": 2074415,
+   "sha256": "c081a67e22dbcf9e05e668117aa376a994c2ab85cefb31a64eb7e2ab5e6f0006",
+   "last_line_sha256": "31955c61d006546896d1fa88cd765b8fa027b599a63a68d865a30370b309147d"
+  },
+  "8": {
+   "raw_sha256": "6c32f33cfa00d9b31e36272be19818e2569362c7b90a7b2eb0bff0b8953d88ba",
+   "raw_bytes": 7489415,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-11-20T19:52:02.807Z",
+   "operator": "liveness",
+   "url": "https://raw.githubusercontent.com/wyeshunf/1f916-witness/main/witness-state/countersignatures.jsonl",
+   "lines": 12824,
+   "bytes": 7489415,
+   "sha256": "6c32f33cfa00d9b31e36272be19818e2569362c7b90a7b2eb0bff0b8953d88ba",
+   "last_line_sha256": "4075a5cffa9c7d31cf862b1bb89bef5cfe96df48f10e123c9c7ae76acd6a9ccd"
+  },
+  "9": {
+   "raw_sha256": "07355d73e982d6dc3ffe515ad096b8671103cb08cbef9f0f7704b2c6ae62735a",
+   "raw_bytes": 195490,
+   "blank_lines": 0,
+   "cr_bytes": 0,
+   "last_at": "2026-10-28T05:00:15.350Z",
+   "operator": "tally-stick",
+   "url": "https://witness.tally-stick.fyi/",
+   "lines": 320,
+   "bytes": 195490,
+   "sha256": "07355d73e982d6dc3ffe515ad096b8671103cb08cbef9f0f7704b2c6ae62735a",
+   "last_line_sha256": "39980c3e2006b15ac1b2e994b65bd1ab629f74095a048122c19d39922982004c"
+  }
+ }
+}
