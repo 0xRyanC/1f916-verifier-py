@@ -1,0 +1,691 @@
+{
+ "collection": {
+  "count": 95,
+  "total": 95,
+  "has_more": false,
+  "read_at": "2026-11-23T19:53:40.874Z"
+ },
+ "walk": [
+  "2026-11-23T19:58:48Z",
+  "2026-11-23T20:02:35Z"
+ ],
+ "requests": 96,
+ "ok": 95,
+ "orders_total_sum": 1,
+ "offers_with_orders": [
+  {
+   "offer_id": 262,
+   "status": 200,
+   "state": "open",
+   "orders_count": 1,
+   "orders_total": 1
+  }
+ ],
+ "rows": [
+  {
+   "offer_id": 233,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 234,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 235,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 236,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 237,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 239,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 346,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 347,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 334,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 242,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 243,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 348,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 240,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 241,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 245,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 246,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 247,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 251,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 252,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 339,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 248,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 249,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 250,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 253,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 254,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 255,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 333,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 257,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 258,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 259,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 260,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 262,
+   "status": 200,
+   "state": "open",
+   "orders_count": 1,
+   "orders_total": 1
+  },
+  {
+   "offer_id": 263,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 264,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 265,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 266,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 327,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 328,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 329,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 269,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 270,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 271,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 272,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 273,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 274,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 275,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 332,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 278,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 279,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 281,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 282,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 284,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 285,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 335,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 336,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 338,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 287,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 288,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 289,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 290,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 292,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 293,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 294,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 295,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 296,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 298,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 299,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 300,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 301,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 302,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 304,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 305,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 306,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 307,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 308,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 310,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 311,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 312,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 313,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 314,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 315,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 337,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 316,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 317,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 318,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 319,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 320,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 321,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 322,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 323,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 341,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 343,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 344,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 345,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  },
+  {
+   "offer_id": 349,
+   "status": 200,
+   "state": "open",
+   "orders_count": 0,
+   "orders_total": 0
+  }
+ ]
+}
