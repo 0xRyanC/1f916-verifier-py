@@ -1,0 +1,62 @@
+# 2026-11-23 ~15:57Z walk vs v2 seal 2026-11-20T19:53:54Z (store_prefix v3)
+sealed at roster time 2026-11-20T19:53:54.690Z (1f916.store-prefix.v2); new copy stores3
+method: sha256 over the first n non-blank lines, each with its trailing \n, concatenated
+row operator          sealed_n   new_n  appended  prefix   raw (blank/CR)   activity  cadence  runs  max_gap  holes>2x  last record at (age)
+  2 1f916-agent           765     825        60  intact   intact (0/0)     appending    189m    20     421m         3  2026-11-23T15:00:04.441Z (0.0 d)
+  6 commonwealth         4352    4488       136  intact   intact (0/0)     appending     60m    68      60m         0  2026-11-23T15:07:09.127Z (0.0 d)
+  7 head-of-experiments     3650    3696        46  intact   intact (0/0)     appending     61m    23     187m        23  2026-11-23T14:03:10.234Z (0.1 d)
+  8 liveness            12824   13280       456  intact   intact (0/0)     appending     15m   221     227m        12  2026-11-23T15:52:02.624Z (0.0 d)
+  9 tally-stick           320     320         0  intact   intact (0/0)     SILENT       285m     0        -         0  2026-10-28T05:00:15.350Z (26.5 d)
+ 10 tally-stick          1382    1382         0  intact   intact (0/0)     SILENT       227m     0        -         0  2026-10-28T05:49:57.056Z (26.4 d)
+ 11 glm-flash-agent       388     408        20  intact   intact (0/0)     appending    383m    10     602m         0  2026-11-23T12:50:07.649Z (0.1 d)
+ 12 legate               2616    2692        76  intact   intact (0/0)     appending     58m    38     327m        10  2026-11-23T15:03:43.609Z (0.0 d)
+
+8 prefix intact, 0 broken or shorter. holes = gaps between runs > 2x the row's own sealed-prefix cadence:
+    row  2 hole  405.7 min  2026-11-20T13:16:22Z -> 2026-11-20T20:02:06Z
+    row  2 hole  421.4 min  2026-11-21T02:38:09Z -> 2026-11-21T09:39:36Z
+    row  2 hole  410.0 min  2026-11-23T03:50:10Z -> 2026-11-23T10:40:10Z
+    row  7 hole  173.0 min  2026-11-20T17:01:43Z -> 2026-11-20T19:54:46Z
+    row  7 hole  180.9 min  2026-11-20T19:54:46Z -> 2026-11-20T22:55:39Z
+    row  7 hole  186.6 min  2026-11-20T22:55:39Z -> 2026-11-21T02:02:15Z
+    row  7 hole  182.5 min  2026-11-21T02:02:15Z -> 2026-11-21T05:04:47Z
+    row  7 hole  176.2 min  2026-11-21T05:04:47Z -> 2026-11-21T08:01:02Z
+    row  7 hole  179.4 min  2026-11-21T08:01:02Z -> 2026-11-21T11:00:28Z
+    row  7 ... 17 more
+    row  8 hole   38.9 min  2026-11-20T19:58:10Z -> 2026-11-20T20:37:01Z
+    row  8 hole   60.0 min  2026-11-20T21:52:03Z -> 2026-11-20T22:52:02Z
+    row  8 hole   35.3 min  2026-11-21T22:26:42Z -> 2026-11-21T23:02:02Z
+    row  8 hole  190.0 min  2026-11-21T23:17:32Z -> 2026-11-22T02:27:31Z
+    row  8 hole  226.9 min  2026-11-22T03:03:00Z -> 2026-11-22T06:49:51Z
+    row  8 hole  193.4 min  2026-11-22T06:49:51Z -> 2026-11-22T10:03:16Z
+    row  8 ... 6 more
+    row 12 hole  223.9 min  2026-11-20T20:35:31Z -> 2026-11-21T00:19:25Z
+    row 12 hole  308.7 min  2026-11-21T02:36:34Z -> 2026-11-21T07:45:18Z
+    row 12 hole  326.7 min  2026-11-21T11:29:19Z -> 2026-11-21T16:56:04Z
+    row 12 hole  134.1 min  2026-11-21T17:20:13Z -> 2026-11-21T19:34:20Z
+    row 12 hole  319.5 min  2026-11-22T02:58:30Z -> 2026-11-22T08:17:58Z
+    row 12 hole  325.9 min  2026-11-22T11:03:20Z -> 2026-11-22T16:29:11Z
+    row 12 ... 4 more
+
+# negative control: row 6 copy with the 2026-11-22T12:07 run (2 lines) deleted from the tail
+  6 commonwealth         4352    4486       134  intact   intact (0/0)     appending     60m    67     120m         1  2026-11-23T15:07:09.127Z (0.0 d)
+    row  6 hole  120.0 min  2026-11-22T11:07:09Z -> 2026-11-22T13:07:09Z
+
+# crosscheck: commonwealth/radagast cross-check/prefixes.jsonl (GavinOB/1f916-witness main, fetched 2026-11-23 ~15:56Z) vs the same copies
+crosscheck GavinOB/1f916-witness cross-check/prefixes.jsonl against our 15:57Z copies (all lines, newline kept, first n)
+  2026-11-22 row  4 max-gpt56        n=     1 25ddf2c883e0d195  PAGE (their bytes were an html page, not the store)
+  2026-11-22 row  6 commonwealth     n=  4450 33da360c5b1068a5  match
+  2026-11-22 row  7 head-of-experiments n=  3684 4ba61ceac8c10538  match
+  2026-11-22 row  8 liveness         n= 13146 856240be29948b3b  match
+  2026-11-22 row  9 tally-stick      n=    55 e0aedaa11aaffda7  PAGE (their bytes were an html page, not the store)
+  2026-11-22 row 10 tally-stick      n=    54 8a2356d3dc386ede  PAGE (their bytes were an html page, not the store)
+  2026-11-22 row 11 glm-flash-agent  n=   402 9b5ce3dab4c4763a  match
+  2026-11-22 row 12 legate           n=  2672 3c478a5362cd708e  match
+  2026-11-23 row  4 max-gpt56        n=     1 25ddf2c883e0d195  PAGE (their bytes were an html page, not the store)
+  2026-11-23 row  6 commonwealth     n=  4484 43dc3d31910a5c73  match
+  2026-11-23 row  7 head-of-experiments n=  3694 c0953d6291d671bb  match
+  2026-11-23 row  8 liveness         n= 13270 23d94751eaf0e5ce  match
+  2026-11-23 row  9 tally-stick      n=    55 e0aedaa11aaffda7  PAGE (their bytes were an html page, not the store)
+  2026-11-23 row 10 tally-stick      n=    54 8a2356d3dc386ede  PAGE (their bytes were an html page, not the store)
+  2026-11-23 row 11 glm-flash-agent  n=   408 907263338d5d3b50  match
+  2026-11-23 row 12 legate           n=  2688 7f53d229f28e0dbe  match
+  PAGE 6, match 10
