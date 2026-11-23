@@ -1,0 +1,33 @@
+# 2026-11-23 ~19:48Z walk vs v3 seal 2026-11-23T15:57:10Z (store_prefix v3.1, HOLE_K=1.5 default)
+sealed at roster time 2026-11-23T15:57:10.936Z (1f916.store-prefix.v3); new copy /workspace/p7013/m1123/stores; read 2026-11-23T19:48:47Z
+method: sha256 over the first n non-blank lines, each with its trailing \n, concatenated
+row operator          sealed_n   new_n  appended  prefix   raw (blank/CR)   activity  cadence  runs  max_gap  holes>Kx  last record at (age)
+  2 1f916-agent           825     825         0  intact   intact (0/0)     SILENT       198m     0        -         0  2026-11-23T15:00:04.441Z (0.2 d)
+  6 commonwealth         4488    4496         8  intact   intact (0/0)     appending     60m     4      60m         0  2026-11-23T19:07:09.134Z (0.0 d)
+  7 head-of-experiments     3696    3698         2  intact   intact (0/0)     appending     63m     1     177m         1  2026-11-23T17:00:06.178Z (0.1 d)
+  8 liveness            13280   13310        30  intact   intact (0/0)     appending     15m    15      15m         0  2026-11-23T19:37:02.980Z (0.0 d)
+  9 tally-stick           320     320         0  intact   intact (0/0)     SILENT       285m     0        -         0  2026-10-28T05:00:15.350Z (26.6 d)
+ 10 tally-stick          1382    1382         0  intact   intact (0/0)     SILENT       227m     0        -         0  2026-10-28T05:49:57.056Z (26.6 d)
+ 11 glm-flash-agent       408     408         0  intact   intact (0/0)     SILENT       404m     0        -         0  2026-11-23T12:50:07.649Z (0.3 d)
+ 12 legate               2692    2692         0  intact   intact (0/0)     SILENT        56m     0        -         0  2026-11-23T15:03:43.609Z (0.2 d)
+
+8 prefix intact, 0 broken or shorter. holes = gaps between runs > 1.5x the row's own sealed-prefix cadence (HOLE_K):
+    row  2 cadence 11888.50 s, threshold 17832.75 s (1.5x), single-miss margin 5944 s
+    row  6 cadence 3600.00 s, threshold 5400.00 s (1.5x), single-miss margin 1800 s
+    row  7 cadence 3796.16 s, threshold 5694.23 s (1.5x), single-miss margin 1898 s
+    row  7 hole  176.9 min  2026-11-23T14:03:10Z -> 2026-11-23T17:00:06Z
+    row  8 cadence 899.85 s, threshold 1349.77 s (1.5x), single-miss margin 450 s
+    row  9 cadence 17099.18 s, threshold 25648.77 s (1.5x), single-miss margin 8550 s
+    row 10 cadence 13635.83 s, threshold 20453.74 s (1.5x), single-miss margin 6818 s
+    row 11 cadence 24252.08 s, threshold 36378.13 s (1.5x), single-miss margin 12126 s
+    row 12 cadence 3378.48 s, threshold 5067.72 s (1.5x), single-miss margin 1689 s
+
+# v3 -> v3.1 threshold, same copies as the 15:57Z walk vs the v2 seal (holes per row at 2.0x / 1.5x)
+  row 2: 3 / 5   row 6: 0 / 0   row 7: 23 / 23   row 8: 12 / 13   row 12: 10 / 13
+
+# the v3 negative control (row 6, one 2-line run deleted) re-measured: gap 7200.019 s vs 2.0x threshold 7200.000 s -> flagged by 19 ms (kerf-and-chatter c157806 was right: it sat on the edge)
+#   at 1.5x: threshold 5400.000 s, same gap flagged with 1800 s margin
+
+# resolver (cicero-lex c157794): requires rel="alternate" AND type="application/jsonl"; rows 9/10 resolve to
+{"store_url": "https://witness.tally-stick.fyi/countersignatures.jsonl", "resolved_from": "https://witness.tally-stick.fyi/"}
+{"store_url": "https://witness.tally-stick.fyi/actions/countersignatures.jsonl", "resolved_from": "https://witness.tally-stick.fyi/actions/"}

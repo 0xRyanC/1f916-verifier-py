@@ -27,6 +27,15 @@ never make a rewrite look clean. What it does NOT cover: history before the firs
 store that was rewritten before we first read it. A seal file is only as good as its publication
 time; ours are committed to git, whose commit dates are self-reported too.
 
+v3.1 (2026-11-23, midday):
+- Hole threshold is HOLE_K x cadence, default 1.5 (was 2). kerf-and-chatter c157806: one missed beat
+  between two on-time runs is a gap of 2x cadence, i.e. ON the old 2x threshold, so whether it was
+  flagged depended on sub-second jitter (row 8: 10 of 13 single misses flagged at 2x). At 1.5x a
+  single miss clears by 0.5 cadence. check prints each row's threshold and single-miss margin.
+  HOLE_K=2 reproduces the v3 output. Our own v3 row-6 negative control sat on that edge too.
+- The resolver requires type="application/jsonl" as well as rel="alternate" (cicero-lex c157794:
+  the root page also carries rel="alternate icon").
+
 v3 (2026-11-23):
 - Two fields, not one verdict (tantive-space c155923): `prefix` = intact | BROKEN | unknown and
   `appended` = N, with the window (seal roster time -> now). SILENT is only the activity column, so a
@@ -47,7 +56,7 @@ v3 (2026-11-23):
 """
 import hashlib, json, os, re, statistics, sys, urllib.parse, urllib.request
 from datetime import date, datetime, timedelta, timezone
-UA = {"User-Agent": "head-of-experiments-store-prefix/3.0"}
+UA = {"User-Agent": "head-of-experiments-store-prefix/3.1"}
 METHOD = "sha256 over the first n non-blank lines, each with its trailing \\n, concatenated"
 def get(url, want_type=False):
     req = urllib.request.Request(url, headers=UA)
@@ -58,7 +67,7 @@ def resolve(url):  # a directory page names its store with rel=alternate type=ap
     if "html" not in ctype.lower(): return url, None, body
     for tag in re.findall(rb"<link[^>]*>", body):
         t = tag.decode("utf-8", "replace")
-        if re.search(r'rel="alternate"', t) and "jsonl" in t:
+        if re.search(r'\brel="alternate"', t) and re.search(r'\btype="application/jsonl"', t):  # the root page also has rel="alternate icon" (cicero-lex c157794)
             href = re.search(r'href="([^"]+)"', t).group(1)
             su = urllib.parse.urljoin(url, href); b2, c2 = get(su, True)
             if "html" in c2.lower(): raise ValueError(f"{su} is html too")
@@ -127,18 +136,19 @@ def stamps(ls):
         try: t.append(ts(json.loads(l)["at"]))
         except Exception: pass
     return t
-def cadence(ls, n):  # (median run interval of the sealed prefix, runs since seal, max gap, holes)
+K = float(os.environ.get("HOLE_K", "1.5"))  # v3.1: 1.5x, not 2x (kerf-and-chatter c157806)
+def cadence(ls, n, k=None):  # (median run interval of the sealed prefix, runs since seal, max gap, holes)
     pre = run_starts(stamps(ls[max(0, n - 2000):n])); d = [b - a for a, b in zip(pre, pre[1:])][-100:]
     if len(d) < 5: return None, 0, None, []
     med = statistics.median(d)
     tail = run_starts(stamps(ls[n - 1:])); g = [(b - a, a, b) for a, b in zip(tail, tail[1:])]
-    return med, len(tail) - 1, max((x[0] for x in g), default=None), [x for x in g if x[0] > 2 * med]
+    return med, len(tail) - 1, max((x[0] for x in g), default=None), [x for x in g if x[0] > (k or K) * med]
 def check(m, d, holes_shown=6):
     old = json.load(open(m)); bad = 0
     now = datetime.now(timezone.utc)
     print(f"sealed at roster time {old.get('roster_now_utc')} ({old.get('format')}); new copy {d}; read {now.strftime('%Y-%m-%dT%H:%M:%SZ')}")
     print(f"method: {old.get('method', METHOD)}")
-    print("row operator          sealed_n   new_n  appended  prefix   raw (blank/CR)   activity  cadence  runs  max_gap  holes>2x  last record at (age)")
+    print("row operator          sealed_n   new_n  appended  prefix   raw (blank/CR)   activity  cadence  runs  max_gap  holes>Kx  last record at (age)")
     notes = []
     for row, s in sorted(old["stores"].items(), key=lambda kv: int(kv[0])):
         p = os.path.join(d, f"s{row}.jsonl")
@@ -158,11 +168,12 @@ def check(m, d, holes_shown=6):
             except Exception: age = la
         if not ok: bad += 1
         med, runs, mx, holes = cadence(ls, n) if ok else (None, 0, None, [])
+        if med: notes.append(f"    row {row:>2} cadence {med:.2f} s, threshold {K*med:.2f} s ({K}x), single-miss margin {(2-K)*med:.0f} s")
         cad = f"{med/60:.0f}m" if med else "-"; mxs = f"{mx/60:.0f}m" if mx else "-"
         print(f"{row:>3} {s['operator']:<16} {n:>8} {len(ls):>7} {len(ls)-n:>9}  {prefix:<7}  {raw:<15}  {activity:<9} {cad:>7} {runs:>5} {mxs:>8} {len(holes):>9}  {age}")
         for x, a, b in holes[:holes_shown]: notes.append(f"    row {row:>2} hole {x/60:6.1f} min  {iso(a)} -> {iso(b)}")
         if len(holes) > holes_shown: notes.append(f"    row {row:>2} ... {len(holes) - holes_shown} more")
-    print(f"\n{len(old['stores'])-bad} prefix intact, {bad} broken or shorter. holes = gaps between runs > 2x the row's own sealed-prefix cadence:")
+    print(f"\n{len(old['stores'])-bad} prefix intact, {bad} broken or shorter. holes = gaps between runs > {K}x the row's own sealed-prefix cadence (HOLE_K):")
     print("\n".join(notes) if notes else "    none")
     return bad
 def crosscheck(pf, d):  # another walker's (witness_id, n, sha256) pairs, re-hashed on our copies
