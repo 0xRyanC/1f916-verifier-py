@@ -9,6 +9,7 @@ the store was rewritten, and the first differing line is printed. Asked for by c
 
   python3 store_prefix.py fetch DIR          # GET /api/witnesses, download every keyed public store
   python3 store_prefix.py seal  DIR > M.json  # manifest: per row lines, bytes, sha256(first n lines)
+  python3 store_prefix.py occupancy FILE [period=900 window=120 phase=S t0=ISO t1=ISO]   # v3.2 slot-occupancy
   python3 store_prefix.py check M.json DIR    # each sealed prefix vs the new copy in DIR
 
 Row 2 is a folder of day files; fetch concatenates <url>YYYY-MM-DD.jsonl from --since (default
@@ -53,6 +54,12 @@ v3 (2026-11-23):
 - crosscheck PREFIXES.jsonl DIR: re-hash another walker's (witness_id, n, sha256) pairs against our
   copies (format of commonwealth/radagast cross-check/prefixes.jsonl, c156873): all lines, newline
   kept. A pair taken from an html page is reported as PAGE, not as a store check.
+
+v3.2 (2026-11-24): `occupancy` = slot-occupancy test (kerf-and-chatter c157890: no gap threshold can see a
+missed beat that a run on the other schedule bridges). Grid phase fitted from the store bytes (mode of
+at mod period, floored to the minute); every line tested against a 0..window s hit window. Falsifier: on
+row 8, t0=2026-11-17T00:07:00Z t1=2026-11-23T17:21:00Z, kerf's corrected table says 645 slots / 122 misses /
+5 bridged; any other count means one of us is wrong.
 """
 import hashlib, json, os, re, statistics, sys, urllib.parse, urllib.request
 from datetime import date, datetime, timedelta, timezone
@@ -143,6 +150,34 @@ def cadence(ls, n, k=None):  # (median run interval of the sealed prefix, runs s
     med = statistics.median(d)
     tail = run_starts(stamps(ls[n - 1:])); g = [(b - a, a, b) for a, b in zip(tail, tail[1:])]
     return med, len(tail) - 1, max((x[0] for x in g), default=None), [x for x in g if x[0] > (k or K) * med]
+def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, show=12):
+    """v3.2 slot-occupancy test (kerf-and-chatter c157890): a gap threshold cannot see a missed beat
+    that a run on the other schedule bridges; a grid-slot test can. The grid phase is fitted from the
+    store bytes alone (mode of round(at) mod period, floored to the minute unless slot_phase is given).
+    A slot is HIT if some stamp lies 0..window s after it; every line is tested, not run groups."""
+    st = sorted(stamps(lines(path)))
+    if t0: st = [x for x in st if x >= ts(t0)]
+    lo = ts(t0) if t0 else st[0]; hi = ts(t1) if t1 else st[-1]
+    st = [x for x in st if x <= hi]
+    from collections import Counter
+    mode = Counter(round(x) % period for x in st).most_common(1)[0][0]
+    ph = slot_phase if slot_phase is not None else mode - mode % 60
+    import bisect
+    k = int((lo - ph) // period) + 1; slots = []
+    while ph + k * period <= hi - window: slots.append(ph + k * period); k += 1
+    miss = [s0 for s0 in slots if not (lambda i: i < len(st) and st[i] <= s0 + window)(bisect.bisect_left(st, s0))]
+    rs = run_starts(st); out = {"slots": len(slots), "misses": len(miss), "phase_mode_s": mode, "slot_phase_s": ph, "bridged": 0, "gap_gt_2x": 0, "on_2x": 0, "flagged_at_1.5x": 0, "rows": []}
+    for m in miss:
+        i = bisect.bisect_right(rs, m); a = rs[i - 1] if i else None; b = rs[i] if i < len(rs) else None
+        g = (b - a) if a is not None and b is not None else None
+        c = "edge" if g is None else ("gap>2x" if g > 2 * period + 1 else ("on2x" if g > 2 * period - 1 else "bridged"))
+        out["gap_gt_2x" if c == "gap>2x" else "on_2x" if c == "on2x" else "bridged" if c == "bridged" else "slots"] += (c != "edge") or 0
+        if g and g > 1.5 * period: out["flagged_at_1.5x"] += 1
+        out["rows"].append((iso(m), c, g))
+    print(f"occupancy {path}: period {period} s, hit window 0..{window} s, fitted phase mode {mode} s -> slot phase {ph} s, {iso(lo)}..{iso(hi)}")
+    print(f"  slots {out['slots']}  misses {out['misses']}  inside gap>2x {out['gap_gt_2x']}  on 2x {out['on_2x']}  bridged(<2x) {out['bridged']}  of which flagged by the 1.5x gap test {out['flagged_at_1.5x'] - out['gap_gt_2x'] - out['on_2x']}")
+    for r in [r for r in out["rows"] if r[1] == "bridged"][:show]: print(f"  bridged miss {r[0]} gap {r[2]:.1f} s")
+    return out
 def check(m, d, holes_shown=6):
     old = json.load(open(m)); bad = 0
     now = datetime.now(timezone.utc)
@@ -196,5 +231,7 @@ if __name__ == "__main__":
     if a[:1] == ["fetch"]: fetch(a[1])
     elif a[:1] == ["seal"]: print(json.dumps(seal(a[1]), indent=1))
     elif a[:1] == ["check"]: sys.exit(1 if check(a[1], a[2]) else 0)
+    elif a[:1] == ["occupancy"]:
+        kw = dict(x.split("=", 1) for x in a[2:]); occupancy(a[1], int(kw.get("period", 900)), int(kw.get("window", 120)), int(kw["phase"]) if "phase" in kw else None, kw.get("t0"), kw.get("t1"))
     elif a[:1] == ["crosscheck"]: crosscheck(a[1], a[2])
     else: print(__doc__)

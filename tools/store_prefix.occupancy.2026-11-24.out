@@ -1,0 +1,56 @@
+# walk 2026-11-24T15:53:03Z copies fetched just before; occupancy v3.2, row 8, kerf-and-chatter c157890 window
+occupancy /workspace/sp1124/s8.jsonl: period 900 s, hit window 0..120 s, fitted phase mode 423 s -> slot phase 420 s, 2026-11-17T00:07:00Z..2026-11-23T17:21:00Z
+  slots 644  misses 122  inside gap>2x 116  on 2x 1  bridged(<2x) 5  of which flagged by the 1.5x gap test 1
+  bridged miss 2026-11-20T02:37:00Z gap 627.3 s
+  bridged miss 2026-11-21T23:07:00Z gap 930.0 s
+  bridged miss 2026-11-22T02:37:00Z gap 767.2 s
+  bridged miss 2026-11-22T02:52:00Z gap 1361.8 s
+  bridged miss 2026-11-22T10:07:00Z gap 1110.7 s
+occupancy /workspace/sp1124/s8.jsonl: period 900 s, hit window 0..240 s, fitted phase mode 423 s -> slot phase 420 s, 2026-11-17T00:07:00Z..2026-11-23T17:21:00Z
+  slots 644  misses 119  inside gap>2x 115  on 2x 1  bridged(<2x) 3  of which flagged by the 1.5x gap test 1
+  bridged miss 2026-11-21T23:07:00Z gap 930.0 s
+  bridged miss 2026-11-22T02:52:00Z gap 1361.8 s
+  bridged miss 2026-11-22T10:07:00Z gap 1110.7 s
+
+# check vs v3 seal 2026-11-23T15:55Z
+sealed at roster time 2026-11-23T15:57:10.936Z (1f916.store-prefix.v3); new copy /workspace/sp1124; read 2026-11-24T15:53:03Z
+method: sha256 over the first n non-blank lines, each with its trailing \n, concatenated
+row operator          sealed_n   new_n  appended  prefix   raw (blank/CR)   activity  cadence  runs  max_gap  holes>Kx  last record at (age)
+  2 1f916-agent           825     837        12  intact   intact (0/0)     appending    198m     4     455m         2  2026-11-24T13:59:35.709Z (0.1 d)
+  6 commonwealth         4488    4536        48  intact   intact (0/0)     appending     60m    24      60m         0  2026-11-24T15:07:09.109Z (0.0 d)
+  7 head-of-experiments     3696    3712        16  intact   intact (0/0)     appending     63m     8     184m         8  2026-11-24T13:55:19.316Z (0.1 d)
+  8 liveness            13280   13418       138  intact   intact (0/0)     appending     15m    67     109m         5  2026-11-24T10:56:12.594Z (0.2 d)
+  9 tally-stick           320     320         0  intact   intact (0/0)     SILENT       285m     0        -         0  2026-10-28T05:00:15.350Z (27.5 d)
+ 10 tally-stick          1382    1382         0  intact   intact (0/0)     SILENT       227m     0        -         0  2026-10-28T05:49:57.056Z (27.4 d)
+ 11 glm-flash-agent       408     412         4  intact   intact (0/0)     appending    404m     2     724m         1  2026-11-24T10:57:32.652Z (0.2 d)
+ 12 legate               2692    2708        16  intact   intact (0/0)     appending     56m     8     346m         5  2026-11-24T14:01:30.919Z (0.1 d)
+
+8 prefix intact, 0 broken or shorter. holes = gaps between runs > 1.5x the row's own sealed-prefix cadence (HOLE_K):
+    row  2 cadence 11888.50 s, threshold 17832.75 s (1.5x), single-miss margin 5944 s
+    row  2 hole  454.7 min  2026-11-23T15:00:04Z -> 2026-11-23T22:34:49Z
+    row  2 hole  424.2 min  2026-11-24T06:55:19Z -> 2026-11-24T13:59:33Z
+    row  6 cadence 3600.00 s, threshold 5400.00 s (1.5x), single-miss margin 1800 s
+    row  7 cadence 3796.16 s, threshold 5694.23 s (1.5x), single-miss margin 1898 s
+    row  7 hole  176.9 min  2026-11-23T14:03:10Z -> 2026-11-23T17:00:06Z
+    row  7 hole  179.8 min  2026-11-23T17:00:06Z -> 2026-11-23T19:59:53Z
+    row  7 hole  181.2 min  2026-11-23T19:59:53Z -> 2026-11-23T23:01:03Z
+    row  7 hole  179.2 min  2026-11-23T23:01:03Z -> 2026-11-24T02:00:16Z
+    row  7 hole  183.8 min  2026-11-24T02:00:16Z -> 2026-11-24T05:04:04Z
+    row  7 hole  178.2 min  2026-11-24T05:04:04Z -> 2026-11-24T08:02:14Z
+    row  7 ... 2 more
+    row  8 cadence 899.85 s, threshold 1349.77 s (1.5x), single-miss margin 450 s
+    row  8 hole   30.0 min  2026-11-24T00:22:02Z -> 2026-11-24T00:52:00Z
+    row  8 hole   30.0 min  2026-11-24T00:52:00Z -> 2026-11-24T01:22:02Z
+    row  8 hole   32.1 min  2026-11-24T06:22:03Z -> 2026-11-24T06:54:09Z
+    row  8 hole   57.9 min  2026-11-24T06:54:09Z -> 2026-11-24T07:52:03Z
+    row  8 hole  109.2 min  2026-11-24T09:07:02Z -> 2026-11-24T10:56:12Z
+    row  9 cadence 17099.18 s, threshold 25648.77 s (1.5x), single-miss margin 8550 s
+    row 10 cadence 13635.83 s, threshold 20453.74 s (1.5x), single-miss margin 6818 s
+    row 11 cadence 24252.08 s, threshold 36378.13 s (1.5x), single-miss margin 12126 s
+    row 11 hole  724.1 min  2026-11-23T12:50:07Z -> 2026-11-24T00:54:15Z
+    row 12 cadence 3378.48 s, threshold 5067.72 s (1.5x), single-miss margin 1689 s
+    row 12 hole  327.9 min  2026-11-23T15:03:43Z -> 2026-11-23T20:31:39Z
+    row 12 hole  243.4 min  2026-11-23T21:11:54Z -> 2026-11-24T01:15:20Z
+    row 12 hole  151.9 min  2026-11-24T02:26:03Z -> 2026-11-24T04:57:56Z
+    row 12 hole  345.9 min  2026-11-24T05:53:50Z -> 2026-11-24T11:39:44Z
+    row 12 hole  141.8 min  2026-11-24T11:39:44Z -> 2026-11-24T14:01:30Z
