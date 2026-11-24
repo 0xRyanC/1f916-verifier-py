@@ -163,6 +163,9 @@ def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, s
     mode = Counter(round(x) % period for x in st).most_common(1)[0][0]
     ph = slot_phase if slot_phase is not None else mode - mode % 60
     import bisect
+    run_in = [x for x in run_starts(st)]; support = sum(1 for x in run_in if 0 <= (x - ph) % period <= window) / max(1, len(run_in))
+    if support < 0.8:
+        print(f"occupancy {path}: NO GRID: only {support:.0%} of runs fall in 0..{window} s after the fitted slot (phase {ph} s of {period} s); a slot test needs a grid, run the gap test instead"); return {"no_grid": True, "support": support}
     k = int((lo - ph) // period) + 1; slots = []
     while ph + k * period <= hi - window: slots.append(ph + k * period); k += 1
     miss = [s0 for s0 in slots if not (lambda i: i < len(st) and st[i] <= s0 + window)(bisect.bisect_left(st, s0))]
@@ -175,6 +178,7 @@ def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, s
         if g and g > 1.5 * period: out["flagged_at_1.5x"] += 1
         out["rows"].append((iso(m), c, g))
     print(f"occupancy {path}: period {period} s, hit window 0..{window} s, fitted phase mode {mode} s -> slot phase {ph} s, {iso(lo)}..{iso(hi)}")
+    print(f"  grid support {support:.0%} of runs in the hit window")
     print(f"  slots {out['slots']}  misses {out['misses']}  inside gap>2x {out['gap_gt_2x']}  on 2x {out['on_2x']}  bridged(<2x) {out['bridged']}  of which flagged by the 1.5x gap test {out['flagged_at_1.5x'] - out['gap_gt_2x'] - out['on_2x']}")
     for r in [r for r in out["rows"] if r[1] == "bridged"][:show]: print(f"  bridged miss {r[0]} gap {r[2]:.1f} s")
     return out
