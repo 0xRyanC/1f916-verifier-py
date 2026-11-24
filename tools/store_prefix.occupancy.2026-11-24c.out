@@ -1,0 +1,30 @@
+# v3.3 occupancy re-run 2026-11-24T19:55:34Z on the same copies fetched 11-24 15:53Z (/workspace/sp1124); only change: slot at t0 counts (ceil) + held-out phase line
+occupancy /workspace/sp1124/s6.jsonl: period 3600 s, hit window 0..120 s, fitted phase mode 429 s -> slot phase 420 s, 2026-11-17T00:00:00Z..2026-11-24T14:00:00Z
+  grid support 100% of runs in the hit window
+  slots 182  misses 0  inside gap>2x 0  on 2x 0  bridged(<2x) 0  of which flagged by the 1.5x gap test 0
+  held-out: first-half phase 420 s, second-half phase 420 s (phase stable); second half 2026-11-20T19:00:00Z..2026-11-24T14:00:00Z graded at the first-half phase: support 100%, slots 91, misses 0
+occupancy /workspace/sp1124/s8.jsonl: period 900 s, hit window 0..120 s, fitted phase mode 423 s -> slot phase 420 s, 2026-11-17T00:07:00Z..2026-11-23T17:21:00Z
+  grid support 87% of runs in the hit window
+  slots 645  misses 122  inside gap>2x 116  on 2x 1  bridged(<2x) 5  of which flagged by the 1.5x gap test 1
+  bridged miss 2026-11-20T02:37:00Z gap 627.3 s
+  bridged miss 2026-11-21T23:07:00Z gap 930.0 s
+  bridged miss 2026-11-22T02:37:00Z gap 767.2 s
+  bridged miss 2026-11-22T02:52:00Z gap 1361.8 s
+  bridged miss 2026-11-22T10:07:00Z gap 1110.7 s
+  held-out: first-half phase 420 s, second-half phase 420 s (phase stable); second half 2026-11-20T08:44:00Z..2026-11-23T17:21:00Z graded at the first-half phase: support 86%, slots 322, misses 84
+occupancy /workspace/sp1124/s8.jsonl: period 900 s, hit window 0..240 s, fitted phase mode 423 s -> slot phase 420 s, 2026-11-17T00:07:00Z..2026-11-23T17:21:00Z
+  grid support 89% of runs in the hit window
+  slots 645  misses 119  inside gap>2x 115  on 2x 1  bridged(<2x) 3  of which flagged by the 1.5x gap test 1
+  bridged miss 2026-11-21T23:07:00Z gap 930.0 s
+  bridged miss 2026-11-22T02:52:00Z gap 1361.8 s
+  bridged miss 2026-11-22T10:07:00Z gap 1110.7 s
+  held-out: first-half phase 420 s, second-half phase 420 s (phase stable); second half 2026-11-20T08:44:00Z..2026-11-23T17:21:00Z graded at the first-half phase: support 86%, slots 322, misses 83
+occupancy /workspace/sp1124/s12.jsonl: NO GRID: only 5% of runs fall in 0..120 s after the fitted slot (phase 1140 s of 3600 s); a slot test needs a grid, run the gap test instead
+occupancy /workspace/sp1124/s7.jsonl: period 10800 s, hit window 0..600 s, fitted phase mode 7097 s -> slot phase 7000 s, 2026-11-20T09:00:00Z..2026-11-24T12:00:00Z
+  grid support 85% of runs in the hit window
+  slots 33  misses 5  inside gap>2x 0  on 2x 0  bridged(<2x) 5  of which flagged by the 1.5x gap test 0
+  bridged miss 2026-11-20T19:56:40Z gap 10853.7 s
+  bridged miss 2026-11-20T22:56:40Z gap 11195.9 s
+  bridged miss 2026-11-21T16:56:40Z gap 10956.5 s
+  bridged miss 2026-11-21T22:56:40Z gap 11226.1 s
+  bridged miss 2026-11-23T04:56:40Z gap 11102.0 s

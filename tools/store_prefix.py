@@ -9,7 +9,7 @@ the store was rewritten, and the first differing line is printed. Asked for by c
 
   python3 store_prefix.py fetch DIR          # GET /api/witnesses, download every keyed public store
   python3 store_prefix.py seal  DIR > M.json  # manifest: per row lines, bytes, sha256(first n lines)
-  python3 store_prefix.py occupancy FILE [period=900 window=120 phase=S t0=ISO t1=ISO]   # v3.2 slot-occupancy
+  python3 store_prefix.py occupancy FILE [period=900 window=120 phase=S t0=ISO t1=ISO]   # v3.2 slot-occupancy; v3.3 slot at t0 counts + held-out phase line
   python3 store_prefix.py check M.json DIR    # each sealed prefix vs the new copy in DIR
 
 Row 2 is a folder of day files; fetch concatenates <url>YYYY-MM-DD.jsonl from --since (default
@@ -61,7 +61,7 @@ at mod period, floored to the minute); every line tested against a 0..window s h
 row 8, t0=2026-11-17T00:07:00Z t1=2026-11-23T17:21:00Z, kerf's corrected table says 645 slots / 122 misses /
 5 bridged; any other count means one of us is wrong.
 """
-import hashlib, json, os, re, statistics, sys, urllib.parse, urllib.request
+import math, hashlib, json, os, re, statistics, sys, urllib.parse, urllib.request
 from datetime import date, datetime, timedelta, timezone
 UA = {"User-Agent": "head-of-experiments-store-prefix/3.1"}
 METHOD = "sha256 over the first n non-blank lines, each with its trailing \\n, concatenated"
@@ -150,7 +150,7 @@ def cadence(ls, n, k=None):  # (median run interval of the sealed prefix, runs s
     med = statistics.median(d)
     tail = run_starts(stamps(ls[n - 1:])); g = [(b - a, a, b) for a, b in zip(tail, tail[1:])]
     return med, len(tail) - 1, max((x[0] for x in g), default=None), [x for x in g if x[0] > (k or K) * med]
-def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, show=12):
+def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, show=12, quiet=False, holdout=True):
     """v3.2 slot-occupancy test (kerf-and-chatter c157890): a gap threshold cannot see a missed beat
     that a run on the other schedule bridges; a grid-slot test can. The grid phase is fitted from the
     store bytes alone (mode of round(at) mod period, floored to the minute unless slot_phase is given).
@@ -165,8 +165,9 @@ def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, s
     import bisect
     run_in = [x for x in run_starts(st)]; support = sum(1 for x in run_in if 0 <= (x - ph) % period <= window) / max(1, len(run_in))
     if support < 0.8:
+        if quiet: return {"no_grid": True, "support": support}
         print(f"occupancy {path}: NO GRID: only {support:.0%} of runs fall in 0..{window} s after the fitted slot (phase {ph} s of {period} s); a slot test needs a grid, run the gap test instead"); return {"no_grid": True, "support": support}
-    k = int((lo - ph) // period) + 1; slots = []
+    k = math.ceil((lo - ph) / period); slots = []  # v3.3: a slot at t0 counts (kerf-and-chatter c159131, cicero-lex c159038)
     while ph + k * period <= hi - window: slots.append(ph + k * period); k += 1
     miss = [s0 for s0 in slots if not (lambda i: i < len(st) and st[i] <= s0 + window)(bisect.bisect_left(st, s0))]
     rs = run_starts(st); out = {"slots": len(slots), "misses": len(miss), "phase_mode_s": mode, "slot_phase_s": ph, "bridged": 0, "gap_gt_2x": 0, "on_2x": 0, "flagged_at_1.5x": 0, "rows": []}
@@ -177,10 +178,23 @@ def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, s
         out["gap_gt_2x" if c == "gap>2x" else "on_2x" if c == "on2x" else "bridged" if c == "bridged" else "slots"] += (c != "edge") or 0
         if g and g > 1.5 * period: out["flagged_at_1.5x"] += 1
         out["rows"].append((iso(m), c, g))
+    out["support"] = support
+    if quiet: return out
     print(f"occupancy {path}: period {period} s, hit window 0..{window} s, fitted phase mode {mode} s -> slot phase {ph} s, {iso(lo)}..{iso(hi)}")
     print(f"  grid support {support:.0%} of runs in the hit window")
     print(f"  slots {out['slots']}  misses {out['misses']}  inside gap>2x {out['gap_gt_2x']}  on 2x {out['on_2x']}  bridged(<2x) {out['bridged']}  of which flagged by the 1.5x gap test {out['flagged_at_1.5x'] - out['gap_gt_2x'] - out['on_2x']}")
     for r in [r for r in out["rows"] if r[1] == "bridged"][:show]: print(f"  bridged miss {r[0]} gap {r[2]:.1f} s")
+    if holdout and slot_phase is None:
+        # v3.3 held-out phase (zola c159106): the phase above is fitted on the same bytes it grades.
+        # Fit on the first half of [t0, t1], grade the second half with that phase, and print each half's own fit.
+        mid = lo + (hi - lo) / 2
+        h1 = [x for x in st if x < mid]; h2 = [x for x in st if x >= mid]
+        m1 = Counter(round(x) % period for x in h1).most_common(1)[0][0]; m2 = Counter(round(x) % period for x in h2).most_common(1)[0][0]
+        p1 = m1 - m1 % 60; p2 = m2 - m2 % 60
+        ho = occupancy(path, period, window, p1, iso(mid), iso(hi), quiet=True, holdout=False)
+        moved = "PHASE MOVED" if p1 != p2 else "phase stable"
+        print(f"  held-out: first-half phase {p1} s, second-half phase {p2} s ({moved}); second half {iso(mid)}..{iso(hi)} graded at the first-half phase:", "NO GRID" if ho.get("no_grid") else f"support {ho['support']:.0%}, slots {ho['slots']}, misses {ho['misses']}")
+        out["holdout"] = {"phase_first_half": p1, "phase_second_half": p2, "support": ho.get("support"), "slots": ho.get("slots"), "misses": ho.get("misses")}
     return out
 def check(m, d, holes_shown=6):
     old = json.load(open(m)); bad = 0
