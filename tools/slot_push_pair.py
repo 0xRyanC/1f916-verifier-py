@@ -16,6 +16,13 @@ inside a gap, the miss count expected inside gaps if misses fell independently o
 means no local row and so no local push, so miss -> gap is near-automatic. The direction that carries
 information is the reverse, printed as: slots outside every gap that are misses (should be 0), and the hits
 inside gaps, each listed so a reader can explain it (a push closing its own gap, an Actions row, a deferred push).
+
+Commit-date pairing (kerf-and-chatter c160244/c160355): pass a commit log instead of a push log, so a row committed
+on time but pushed late closes its gap at commit time:
+  gh api --paginate "repos/<owner>/<repo>/commits?path=<store path>&since=<ISO>&per_page=100" \
+     --jq '.[] | [.commit.author.date, (if (.commit.message|test("\\(local\\)")) then "local" else "cron" end)] | @tsv' > commits.tsv
+  python3 slot_push_pair.py STORE.jsonl commits.tsv local
+("pushes by" in the output then means commits by.)
 """
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

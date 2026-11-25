@@ -1,0 +1,44 @@
+push log 2026-11-18T20:22:09Z..2026-11-25T19:52:07Z: 475 pushes by local, 85 by others; slots 669 misses 195
+misses inside a local push gap > 1000 s: 195; outside: 0; gaps 18, gaps with no miss: 0
+  gap    60.0 min 2026-11-19T01:52:08Z -> 2026-11-19T02:52:07Z  misses   3  other-actor pushes 2
+  gap    75.1 min 2026-11-19T08:37:08Z -> 2026-11-19T09:52:16Z  misses   4  other-actor pushes 0
+  gap    75.0 min 2026-11-19T13:07:08Z -> 2026-11-19T14:22:09Z  misses   4  other-actor pushes 1
+  gap    30.0 min 2026-11-19T15:37:08Z -> 2026-11-19T16:07:07Z  misses   1  other-actor pushes 0
+  gap    60.0 min 2026-11-20T01:52:07Z -> 2026-11-20T02:52:07Z  misses   3  other-actor pushes 2
+  gap    61.0 min 2026-11-20T08:22:08Z -> 2026-11-20T09:23:11Z  misses   3  other-actor pushes 0
+  gap    45.0 min 2026-11-20T19:52:08Z -> 2026-11-20T20:37:07Z  misses   2  other-actor pushes 1
+  gap    60.0 min 2026-11-20T21:52:09Z -> 2026-11-20T22:52:07Z  misses   3  other-actor pushes 0
+  gap   885.0 min 2026-11-21T22:22:07Z -> 2026-11-22T13:07:08Z  misses  58  other-actor pushes 10
+  gap    90.0 min 2026-11-23T00:37:07Z -> 2026-11-23T02:07:08Z  misses   5  other-actor pushes 1
+  gap   225.0 min 2026-11-23T11:07:07Z -> 2026-11-23T14:52:08Z  misses  14  other-actor pushes 1
+  gap    60.0 min 2026-11-24T00:22:07Z -> 2026-11-24T01:22:07Z  misses   2  other-actor pushes 1
+  gap    89.9 min 2026-11-24T06:22:16Z -> 2026-11-24T07:52:08Z  misses   5  other-actor pushes 1
+  gap   177.7 min 2026-11-24T09:07:08Z -> 2026-11-24T12:04:48Z  misses  10  other-actor pushes 1
+  gap   797.3 min 2026-11-24T12:04:48Z -> 2026-11-25T01:22:07Z  misses  52  other-actor pushes 6
+  gap    30.1 min 2026-11-25T06:52:07Z -> 2026-11-25T07:22:14Z  misses   1  other-actor pushes 0
+  gap   149.9 min 2026-11-25T07:22:14Z -> 2026-11-25T09:52:08Z  misses   9  other-actor pushes 0
+  gap   250.3 min 2026-11-25T09:52:08Z -> 2026-11-25T14:02:28Z  misses  16  other-actor pushes 3
+base rate: gaps > 1000 s cover 32.05% of 2026-11-18T20:22:09Z..2026-11-25T19:52:07Z; 214 of 669 slots (32.0%) sit inside a gap
+  if misses fell independently of gaps: expected 62.4 of 195 inside; observed 195
+  permutation (seed 1125, 10000 shuffles of 195 miss labels over 669 slots, gaps fixed): max 83, p(>= 195) <= 0.0001
+  caveat: this null is weak by construction (a local miss leaves no local push), so read the reverse direction:
+reverse: 455 slots outside every gap, misses among them 0; 214 slots inside gaps, hits among them 19
+  hit inside a gap: slot 2026-11-19T02:52:00Z  gap closes 2026-11-19T02:52:07Z (+7 s after the slot)
+  hit inside a gap: slot 2026-11-19T09:52:00Z  gap closes 2026-11-19T09:52:16Z (+16 s after the slot)
+  hit inside a gap: slot 2026-11-19T14:22:00Z  gap closes 2026-11-19T14:22:09Z (+9 s after the slot)
+  hit inside a gap: slot 2026-11-19T16:07:00Z  gap closes 2026-11-19T16:07:07Z (+7 s after the slot)
+  hit inside a gap: slot 2026-11-20T02:52:00Z  gap closes 2026-11-20T02:52:07Z (+7 s after the slot)
+  hit inside a gap: slot 2026-11-20T09:22:00Z  gap closes 2026-11-20T09:23:11Z (+71 s after the slot)
+  hit inside a gap: slot 2026-11-20T20:37:00Z  gap closes 2026-11-20T20:37:07Z (+7 s after the slot)
+  hit inside a gap: slot 2026-11-20T22:52:00Z  gap closes 2026-11-20T22:52:07Z (+7 s after the slot)
+  hit inside a gap: slot 2026-11-22T13:07:00Z  gap closes 2026-11-22T13:07:08Z (+8 s after the slot)
+  hit inside a gap: slot 2026-11-23T02:07:00Z  gap closes 2026-11-23T02:07:08Z (+8 s after the slot)
+  hit inside a gap: slot 2026-11-23T14:52:00Z  gap closes 2026-11-23T14:52:08Z (+8 s after the slot)
+  hit inside a gap: slot 2026-11-24T00:52:00Z  gap closes 2026-11-24T01:22:07Z (+1807 s after the slot)
+  hit inside a gap: slot 2026-11-24T01:22:00Z  gap closes 2026-11-24T01:22:07Z (+7 s after the slot)
+  hit inside a gap: slot 2026-11-24T07:52:00Z  gap closes 2026-11-24T07:52:08Z (+8 s after the slot)
+  hit inside a gap: slot 2026-11-24T09:22:00Z  gap closes 2026-11-24T12:04:48Z (+9768 s after the slot)
+  hit inside a gap: slot 2026-11-25T01:07:00Z  gap closes 2026-11-25T01:22:07Z (+907 s after the slot)
+  hit inside a gap: slot 2026-11-25T01:22:00Z  gap closes 2026-11-25T01:22:07Z (+7 s after the slot)
+  hit inside a gap: slot 2026-11-25T07:22:00Z  gap closes 2026-11-25T07:22:14Z (+14 s after the slot)
+  hit inside a gap: slot 2026-11-25T09:52:00Z  gap closes 2026-11-25T09:52:08Z (+8 s after the slot)
