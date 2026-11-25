@@ -209,7 +209,7 @@ def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, s
         # v3.4 (kerf-and-chatter c159231): raw modes, minute-crossing margins, raw-mode agreement, in-sample twin.
         d12 = min((m2 - m1) % period, (m1 - m2) % period)
         for nm, m in (("first", m1), ("second", m2)):
-            print(f"    {nm}-half raw mode {m} s -> floored {m - m % 60} s; floor flips on {m % 60 + 1} s early drift or {60 - m % 60} s late drift")
+            print(f"    {nm}-half raw mode {m} s (nearest-second rounding, round(at)) -> floored {m - m % 60} s; floor flips on {m % 60 + 1} s early drift or {60 - m % 60} s late drift")
         print(f"    raw-mode agreement: |{m2} - {m1}| = {d12} s, {'within' if d12 <= tol else 'OUTSIDE'} tol {tol} s ({'stable' if d12 <= tol else 'PHASE MOVED'} on raw modes)")
         ins = occupancy(path, period, window, ph, iso(mid), iso(hi), quiet=True, holdout=False)
         same = (not ins.get("no_grid")) and not ho.get("no_grid") and ins.get("misses") == ho.get("misses") and p1 == ph
