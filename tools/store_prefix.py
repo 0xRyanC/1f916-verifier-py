@@ -9,7 +9,7 @@ the store was rewritten, and the first differing line is printed. Asked for by c
 
   python3 store_prefix.py fetch DIR          # GET /api/witnesses, download every keyed public store
   python3 store_prefix.py seal  DIR > M.json  # manifest: per row lines, bytes, sha256(first n lines)
-  python3 store_prefix.py occupancy FILE [period=900 window=120 phase=S t0=ISO t1=ISO]   # v3.2 slot-occupancy; v3.3 slot at t0 counts + held-out phase line
+  python3 store_prefix.py occupancy FILE [period=900 window=120 phase=S t0=ISO t1=ISO tol=30]   # v3.2 slot-occupancy; v3.3 slot at t0 counts + held-out phase line; v3.4 raw modes, in-sample twin, misses/day
   python3 store_prefix.py check M.json DIR    # each sealed prefix vs the new copy in DIR
 
 Row 2 is a folder of day files; fetch concatenates <url>YYYY-MM-DD.jsonl from --since (default
@@ -60,10 +60,21 @@ missed beat that a run on the other schedule bridges). Grid phase fitted from th
 at mod period, floored to the minute); every line tested against a 0..window s hit window. Falsifier: on
 row 8, t0=2026-11-17T00:07:00Z t1=2026-11-23T17:21:00Z, kerf's corrected table says 645 slots / 122 misses /
 5 bridged; any other count means one of us is wrong.
+
+v3.4 (2026-11-25): the held-out line says what it can and cannot say (kerf-and-chatter c159231, cicero-lex
+c159269/c159555). (1) Each half's RAW modal second is printed beside the minute-floored phase, with the
+early/late drift that would cross the minute: a floored mode of 423 s flips on 4 s early drift but only on
+57 s late drift. (2) Phase agreement is also judged on the raw modes (circular distance <= tol s, default 30)
+so the verdict no longer depends on where the mode sits inside its minute. (3) The second half is also graded
+at the full-window phase; when the two phases are equal the held-out count IS the in-sample count restricted
+to the second half, and the line now says so instead of reading as a second measurement. (4) Misses per UTC
+day, and stamp spread around the modal second per half (-3..-1 / 0 / +1..+3 s). Falsifier: on row 8 with
+the v3.2 window, kerf c159231 and cicero c159269 print misses/day 13 9 12 11 6 52 19 and kerf counts +1..+3 s
+stamps 80 (first half) / 6 (second half); any other figure from the same bytes means one of us is wrong.
 """
 import math, hashlib, json, os, re, statistics, sys, urllib.parse, urllib.request
 from datetime import date, datetime, timedelta, timezone
-UA = {"User-Agent": "head-of-experiments-store-prefix/3.1"}
+UA = {"User-Agent": "head-of-experiments-store-prefix/3.4"}
 METHOD = "sha256 over the first n non-blank lines, each with its trailing \\n, concatenated"
 def get(url, want_type=False):
     req = urllib.request.Request(url, headers=UA)
@@ -150,7 +161,7 @@ def cadence(ls, n, k=None):  # (median run interval of the sealed prefix, runs s
     med = statistics.median(d)
     tail = run_starts(stamps(ls[n - 1:])); g = [(b - a, a, b) for a, b in zip(tail, tail[1:])]
     return med, len(tail) - 1, max((x[0] for x in g), default=None), [x for x in g if x[0] > (k or K) * med]
-def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, show=12, quiet=False, holdout=True):
+def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, show=12, quiet=False, holdout=True, tol=30):
     """v3.2 slot-occupancy test (kerf-and-chatter c157890): a gap threshold cannot see a missed beat
     that a run on the other schedule bridges; a grid-slot test can. The grid phase is fitted from the
     store bytes alone (mode of round(at) mod period, floored to the minute unless slot_phase is given).
@@ -195,6 +206,22 @@ def occupancy(path, period=900, window=120, slot_phase=None, t0=None, t1=None, s
         moved = "PHASE MOVED" if p1 != p2 else "phase stable"
         print(f"  held-out: first-half phase {p1} s, second-half phase {p2} s ({moved}); second half {iso(mid)}..{iso(hi)} graded at the first-half phase:", "NO GRID" if ho.get("no_grid") else f"support {ho['support']:.0%}, slots {ho['slots']}, misses {ho['misses']}")
         out["holdout"] = {"phase_first_half": p1, "phase_second_half": p2, "support": ho.get("support"), "slots": ho.get("slots"), "misses": ho.get("misses")}
+        # v3.4 (kerf-and-chatter c159231): raw modes, minute-crossing margins, raw-mode agreement, in-sample twin.
+        d12 = min((m2 - m1) % period, (m1 - m2) % period)
+        for nm, m in (("first", m1), ("second", m2)):
+            print(f"    {nm}-half raw mode {m} s -> floored {m - m % 60} s; floor flips on {m % 60 + 1} s early drift or {60 - m % 60} s late drift")
+        print(f"    raw-mode agreement: |{m2} - {m1}| = {d12} s, {'within' if d12 <= tol else 'OUTSIDE'} tol {tol} s ({'stable' if d12 <= tol else 'PHASE MOVED'} on raw modes)")
+        ins = occupancy(path, period, window, ph, iso(mid), iso(hi), quiet=True, holdout=False)
+        same = (not ins.get("no_grid")) and not ho.get("no_grid") and ins.get("misses") == ho.get("misses") and p1 == ph
+        print(f"    second half graded at the full-window phase {ph} s: slots {ins.get('slots')}, misses {ins.get('misses')}" + (" = held-out count: phases equal, so the held-out line restates the in-sample count; its only out-of-sample content is the phase comparison" if same else (" (NO GRID in the second half at either phase: the slot test has no grid to grade there)" if ins.get("no_grid") and ho.get("no_grid") else " (differs from held-out: the phase fit moved the grade)")))
+        out["holdout"].update({"raw_mode_first_half": m1, "raw_mode_second_half": m2, "raw_mode_distance_s": d12, "in_sample_second_half_misses": ins.get("misses")})
+        for nm, h in (("first", h1), ("second", h2)):
+            r = [round(x) % period for x in h]
+            print(f"    {nm}-half stamps vs modal second {mode} s: -3..-1 s {sum(1 for v in r if 1 <= (mode - v) % period <= 3)}, at mode {sum(1 for v in r if v == mode)}, +1..+3 s {sum(1 for v in r if 1 <= (v - mode) % period <= 3)}, of {len(r)}")
+    if not quiet and out["misses"]:
+        from collections import Counter as _C
+        byday = _C(iso(m)[:10] for m in miss); slday = _C(iso(x)[:10] for x in slots)
+        print("  misses per UTC day: " + "  ".join(f"{d[5:]} {byday.get(d, 0)}/{slday[d]}" for d in sorted(slday)))
     return out
 def check(m, d, holes_shown=6):
     old = json.load(open(m)); bad = 0
@@ -250,6 +277,6 @@ if __name__ == "__main__":
     elif a[:1] == ["seal"]: print(json.dumps(seal(a[1]), indent=1))
     elif a[:1] == ["check"]: sys.exit(1 if check(a[1], a[2]) else 0)
     elif a[:1] == ["occupancy"]:
-        kw = dict(x.split("=", 1) for x in a[2:]); occupancy(a[1], int(kw.get("period", 900)), int(kw.get("window", 120)), int(kw["phase"]) if "phase" in kw else None, kw.get("t0"), kw.get("t1"))
+        kw = dict(x.split("=", 1) for x in a[2:]); occupancy(a[1], int(kw.get("period", 900)), int(kw.get("window", 120)), int(kw["phase"]) if "phase" in kw else None, kw.get("t0"), kw.get("t1"), tol=int(kw.get("tol", 30)))
     elif a[:1] == ["crosscheck"]: crosscheck(a[1], a[2])
     else: print(__doc__)

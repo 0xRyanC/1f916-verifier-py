@@ -1,0 +1,57 @@
+# store_prefix v3.4 occupancy, run 2026-11-25T15:50:54Z
+# A: kerf-and-chatter/cicero-lex window on the 11-24 copy /workspace/sp1124/s8.jsonl (sha256 88ad795ae6137253..., 13418 lines)
+occupancy /workspace/sp1124/s8.jsonl: period 900 s, hit window 0..120 s, fitted phase mode 423 s -> slot phase 420 s, 2026-11-17T00:07:00Z..2026-11-23T17:21:00Z
+  grid support 87% of runs in the hit window
+  slots 645  misses 122  inside gap>2x 116  on 2x 1  bridged(<2x) 5  of which flagged by the 1.5x gap test 1
+  bridged miss 2026-11-20T02:37:00Z gap 627.3 s
+  bridged miss 2026-11-21T23:07:00Z gap 930.0 s
+  bridged miss 2026-11-22T02:37:00Z gap 767.2 s
+  bridged miss 2026-11-22T02:52:00Z gap 1361.8 s
+  bridged miss 2026-11-22T10:07:00Z gap 1110.7 s
+  held-out: first-half phase 420 s, second-half phase 420 s (phase stable); second half 2026-11-20T08:44:00Z..2026-11-23T17:21:00Z graded at the first-half phase: support 86%, slots 322, misses 84
+    first-half raw mode 423 s -> floored 420 s; floor flips on 4 s early drift or 57 s late drift
+    second-half raw mode 423 s -> floored 420 s; floor flips on 4 s early drift or 57 s late drift
+    raw-mode agreement: |423 - 423| = 0 s, within tol 30 s (stable on raw modes)
+    second half graded at the full-window phase 420 s: slots 322, misses 84 = held-out count: phases equal, so the held-out line restates the in-sample count; its only out-of-sample content is the phase comparison
+    first-half stamps vs modal second 423 s: -3..-1 s 188, at mode 300, +1..+3 s 80, of 650
+    second-half stamps vs modal second 423 s: -3..-1 s 216, at mode 252, +1..+3 s 6, of 564
+  misses per UTC day: 11-17 13/96  11-18 9/96  11-19 12/96  11-20 11/96  11-21 6/96  11-22 52/96  11-23 19/69
+# B: fresh row 8 fetch 2026-11-25T15:50:33Z (sha256 f23f35483eaa4314..., 13510 lines), t0 11-17 00:07Z to last stamp
+occupancy /workspace/sp1125/s8.jsonl: period 900 s, hit window 0..120 s, fitted phase mode 423 s -> slot phase 420 s, 2026-11-17T00:07:00Z..2026-11-25T15:37:02Z
+  grid support 87% of runs in the hit window
+  slots 830  misses 217  inside gap>2x 206  on 2x 1  bridged(<2x) 10  of which flagged by the 1.5x gap test 6
+  bridged miss 2026-11-20T02:37:00Z gap 627.3 s
+  bridged miss 2026-11-21T23:07:00Z gap 930.0 s
+  bridged miss 2026-11-22T02:37:00Z gap 767.2 s
+  bridged miss 2026-11-22T02:52:00Z gap 1361.8 s
+  bridged miss 2026-11-22T10:07:00Z gap 1110.7 s
+  bridged miss 2026-11-24T00:37:00Z gap 1798.9 s
+  bridged miss 2026-11-24T16:07:00Z gap 1382.9 s
+  bridged miss 2026-11-24T16:22:00Z gap 1382.9 s
+  bridged miss 2026-11-25T10:07:00Z gap 1566.1 s
+  bridged miss 2026-11-25T10:22:00Z gap 1566.1 s
+  held-out: first-half phase 420 s, second-half phase 420 s (phase stable); second half 2026-11-21T07:52:01Z..2026-11-25T15:37:02Z graded at the first-half phase: support 83%, slots 414, misses 172
+    first-half raw mode 423 s -> floored 420 s; floor flips on 4 s early drift or 57 s late drift
+    second-half raw mode 423 s -> floored 420 s; floor flips on 4 s early drift or 57 s late drift
+    raw-mode agreement: |423 - 423| = 0 s, within tol 30 s (stable on raw modes)
+    second half graded at the full-window phase 420 s: slots 414, misses 172 = held-out count: phases equal, so the held-out line restates the in-sample count; its only out-of-sample content is the phase comparison
+    first-half stamps vs modal second 423 s: -3..-1 s 252, at mode 402, +1..+3 s 82, of 844
+    second-half stamps vs modal second 423 s: -3..-1 s 232, at mode 246, +1..+3 s 6, of 590
+  misses per UTC day: 11-17 13/96  11-18 9/96  11-19 12/96  11-20 11/96  11-21 6/96  11-22 52/96  11-23 19/96  11-24 65/96  11-25 30/62
+# C: same fresh copy, only the time after kerf's t1
+occupancy /workspace/sp1125/s8.jsonl: period 900 s, hit window 0..120 s, fitted phase mode 423 s -> slot phase 420 s, 2026-11-23T17:21:00Z..2026-11-25T15:37:02Z
+  grid support 83% of runs in the hit window
+  slots 185  misses 95  inside gap>2x 90  on 2x 0  bridged(<2x) 5  of which flagged by the 1.5x gap test 5
+  bridged miss 2026-11-24T00:37:00Z gap 1798.9 s
+  bridged miss 2026-11-24T16:07:00Z gap 1382.9 s
+  bridged miss 2026-11-24T16:22:00Z gap 1382.9 s
+  bridged miss 2026-11-25T10:07:00Z gap 1566.1 s
+  bridged miss 2026-11-25T10:22:00Z gap 1566.1 s
+  held-out: first-half phase 420 s, second-half phase 420 s (phase stable); second half 2026-11-24T16:29:01Z..2026-11-25T15:37:02Z graded at the first-half phase: NO GRID
+    first-half raw mode 423 s -> floored 420 s; floor flips on 4 s early drift or 57 s late drift
+    second-half raw mode 422 s -> floored 420 s; floor flips on 3 s early drift or 58 s late drift
+    raw-mode agreement: |422 - 423| = 1 s, within tol 30 s (stable on raw modes)
+    second half graded at the full-window phase 420 s: slots None, misses None (NO GRID in the second half at either phase: the slot test has no grid to grade there)
+    first-half stamps vs modal second 423 s: -3..-1 s 44, at mode 70, +1..+3 s 2, of 134
+    second-half stamps vs modal second 423 s: -3..-1 s 36, at mode 26, +1..+3 s 0, of 86
+  misses per UTC day: 11-23 0/27  11-24 65/96  11-25 30/62
