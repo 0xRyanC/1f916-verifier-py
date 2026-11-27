@@ -1,0 +1,184 @@
+{
+ "url": "https://1f916.ai/api/pulse",
+ "n": 20,
+ "o_def": "server - client (ms)",
+ "bracket": [
+  -32.0,
+  53.3
+ ],
+ "width": 85.2,
+ "empty": false,
+ "edge_lo_from": 16,
+ "edge_hi_from": 19,
+ "edge_lo_rtt": 121.5,
+ "edge_hi_rtt": 90.2,
+ "rtt_min": 90.2,
+ "rtt_median": 146.3,
+ "date_control": {
+  "rows_with_date": 20,
+  "inconsistent": 0
+ },
+ "lags": [
+  {
+   "L_client_minus_server": 10.0,
+   "corrected": [
+    -22.0,
+    63.3
+   ],
+   "sign": "unresolved (interval contains 0)"
+  },
+  {
+   "L_client_minus_server": -900.0,
+   "corrected": [
+    -932.0,
+    -846.7
+   ],
+   "sign": "negative"
+  }
+ ],
+ "sntp": [],
+ "sntp_note": "sntp offset_ms is ref - client; if the board's clock and the reference both keep true time, it should fall inside bracket",
+ "sntp_inside_bracket": [],
+ "triples": [
+  {
+   "t_send": 1795794605558.184,
+   "now": 1795794605646,
+   "t_recv": 1795794605686.266,
+   "date": "Fri, 27 Nov 2026 15:50:05 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794606186.624,
+   "now": 1795794606292,
+   "t_recv": 1795794606354.405,
+   "date": "Fri, 27 Nov 2026 15:50:06 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794606854.697,
+   "now": 1795794606970,
+   "t_recv": 1795794607004.34,
+   "date": "Fri, 27 Nov 2026 15:50:07 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794607504.642,
+   "now": 1795794607610,
+   "t_recv": 1795794607650.894,
+   "date": "Fri, 27 Nov 2026 15:50:07 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794608151.192,
+   "now": 1795794608363,
+   "t_recv": 1795794608398.251,
+   "date": "Fri, 27 Nov 2026 15:50:08 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794608898.598,
+   "now": 1795794609001,
+   "t_recv": 1795794609057.82,
+   "date": "Fri, 27 Nov 2026 15:50:09 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794609558.251,
+   "now": 1795794609630,
+   "t_recv": 1795794609664.417,
+   "date": "Fri, 27 Nov 2026 15:50:09 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794610164.74,
+   "now": 1795794610221,
+   "t_recv": 1795794610263.309,
+   "date": "Fri, 27 Nov 2026 15:50:10 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794610763.638,
+   "now": 1795794610821,
+   "t_recv": 1795794610856.852,
+   "date": "Fri, 27 Nov 2026 15:50:10 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794611357.339,
+   "now": 1795794611415,
+   "t_recv": 1795794611459.601,
+   "date": "Fri, 27 Nov 2026 15:50:11 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794611960.137,
+   "now": 1795794612085,
+   "t_recv": 1795794612123.998,
+   "date": "Fri, 27 Nov 2026 15:50:12 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794612624.285,
+   "now": 1795794612839,
+   "t_recv": 1795794612883.588,
+   "date": "Fri, 27 Nov 2026 15:50:12 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794613383.881,
+   "now": 1795794613505,
+   "t_recv": 1795794613546.712,
+   "date": "Fri, 27 Nov 2026 15:50:13 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794614047.091,
+   "now": 1795794614328,
+   "t_recv": 1795794614361.58,
+   "date": "Fri, 27 Nov 2026 15:50:14 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794614861.846,
+   "now": 1795794614967,
+   "t_recv": 1795794615004.069,
+   "date": "Fri, 27 Nov 2026 15:50:15 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794615504.372,
+   "now": 1795794615626,
+   "t_recv": 1795794615678.125,
+   "date": "Fri, 27 Nov 2026 15:50:15 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794616178.418,
+   "now": 1795794616268,
+   "t_recv": 1795794616299.955,
+   "date": "Fri, 27 Nov 2026 15:50:16 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794616800.247,
+   "now": 1795794616900,
+   "t_recv": 1795794616935.712,
+   "date": "Fri, 27 Nov 2026 15:50:16 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794617436.009,
+   "now": 1795794617497,
+   "t_recv": 1795794617533.445,
+   "date": "Fri, 27 Nov 2026 15:50:17 GMT",
+   "cache_control": "no-store"
+  },
+  {
+   "t_send": 1795794618033.741,
+   "now": 1795794618087,
+   "t_recv": 1795794618123.917,
+   "date": "Fri, 27 Nov 2026 15:50:18 GMT",
+   "cache_control": "no-store"
+  }
+ ]
+}
